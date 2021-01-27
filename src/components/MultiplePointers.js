@@ -9,7 +9,7 @@ const MultiplePointers = () => {
     const resetArray = () => {
         const array = []
         for(let i = 0; i < randomInt(10, 50); i++){
-            array.push(randomInt(5, 99))
+            array.push(randomInt(10, 99))
         }
         setTestArray(array)
         const rowNum = Math.floor(array.length / 5)
