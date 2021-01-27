@@ -4,6 +4,7 @@ import ArrayCircle from './ArrayCircle'
 const MultiplePointers = () => {
 
     const [testArray, setTestArray] = useState([])
+    const [rows, setRows] = useState(1)
 
     const resetArray = () => {
         const array = []
@@ -11,7 +12,8 @@ const MultiplePointers = () => {
             array.push(randomInt(5, 99))
         }
         setTestArray(array)
-        console.log(testArray)
+        const rowNum = Math.floor(array.length / 5)
+        setRows(rowNum)
     }
 
     const randomInt = (min, max) => {
@@ -39,7 +41,7 @@ const MultiplePointers = () => {
     }, [])
 
     return (
-        <div>
+        <div className={`h-64 grid grid-rows-${rows} grid-flow-col gap-4 items-center`}>
             {testArray.map((value, index) => {
                 return <ArrayCircle value={value} index={index} />
             })}
