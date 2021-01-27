@@ -1,4 +1,4 @@
-import Navbar from './components/Navbar'
+import Navbar from './containers/Navbar'
 import Algorithms from './containers/Algorithms'
 
 function App() {

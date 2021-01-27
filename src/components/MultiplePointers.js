@@ -3,7 +3,7 @@ import React from 'react'
 const MultiplePointers = () => {
     return (
         <div>
-            
+            hello
         </div>
     )
 }
