@@ -9,7 +9,7 @@ const MultiplePointers = () => {
     const resetArray = () => {
         const array = []
         for(let i = 0; i < randomInt(10, 50); i++){
-            array.push(randomInt(10, 99))
+            array.push(randomInt(20, 75))
         }
         setTestArray(array)
         const rowNum = Math.floor(array.length / 5)
@@ -41,10 +41,15 @@ const MultiplePointers = () => {
     }, [])
 
     return (
-        <div className={`h-64 grid grid-rows-${rows} grid-flow-col gap-4 items-center`}>
-            {testArray.map((value, index) => {
-                return <ArrayCircle value={value} index={index} />
-            })}
+        <div>
+            <div className={`flex items-center h-64 grid grid-rows-${rows} grid-flow-col gap-8`}>
+                {testArray.map((value, index) => {
+                    return <ArrayCircle value={value} index={index} />
+                })}
+            </div>
+            <button onClick={() => sumZero(testArray)}>
+                Run
+            </button>
         </div>
     )
 }
