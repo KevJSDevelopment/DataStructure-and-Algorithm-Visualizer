@@ -20,19 +20,21 @@ const MultiplePointers = () => {
         return Math.floor(Math.random() * (max - min + 1) + min)
     }
 
-    const sumZero = (arr) => {
+    const findSum = (arr, total = 100) => {
         let left = 0;
         let right = arr.length - 1;
         while(left < right) {
             let sum = arr[left] + arr[right]
-            if(sum === 0) {
-                return [arr[left], arr[right]]
+            if(sum === total) {
+                 console.log([arr[left], arr[right]])
+                 return true
             } else if(sum > 0) {
                   right --;     
             } else {
                   left ++;       
             }
         }
+        console.log("false")
         return false
     }
 
@@ -47,7 +49,7 @@ const MultiplePointers = () => {
                     return <ArrayCircle value={value} index={index} />
                 })}
             </div>
-            <button onClick={() => sumZero(testArray)}>
+            <button className="hover:bg-gray-200 rounded-xl p-1 float-right" onClick={() => findSum(testArray)}>
                 Run
             </button>
         </div>
