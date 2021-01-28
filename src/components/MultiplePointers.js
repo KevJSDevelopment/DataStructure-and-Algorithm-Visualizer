@@ -22,27 +22,24 @@ const MultiplePointers = () => {
 
     const findSum = (left = 0, right = testArray.length - 1, total = 100, oldTarget1 = null, oldTarget2 = null) => {
         
-        if(left >= testArray.length - 2){
+        if(left >= testArray.length - 1){
             return false
         }
 
         let sum = testArray[left] + testArray[right]
 
         if(oldTarget1 !== null){
-            oldTarget1.style.border = "0"
+            oldTarget1.style.backgroundColor = "rgb(107, 114, 128)"
         }
         if(oldTarget2 !== null){
-            oldTarget2.style.border = "0"
+            oldTarget2.style.backgroundColor = "rgb(107, 114, 128)"
         }
 
         const target1 = document.getElementById(`circle-${left}`)
         const target2 = document.getElementById(`circle-${right}`)
 
-        target1.style.border = "2px"
-        target2.style.border = "2px"
-
-        target1.style.border = "2px solid black"
-        target2.style.border = "2px solid black"
+        target1.style.backgroundColor = "whitesmoke"
+        target2.style.backgroundColor = "whitesmoke"
 
         if(sum === total) {
             const answer1 = document.getElementById(`circle-${left}`)
