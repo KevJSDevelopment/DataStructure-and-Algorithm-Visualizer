@@ -24,34 +24,29 @@ const MergeSort = () => {
         }
         // In order to divide the array in half, we need to figure out the middle
         const middle = Math.floor(array.length / 2);
-        
         // This is where we will be dividing the array into left and right
         const left = array.slice(0, middle);
         const right = array.slice(middle);
-        
         // Using recursion to combine the left and right
-        return merge(
-            mergeSort(left), mergeSort(right)
-        );
+        return merge(mergeSort(left), mergeSort(right));
     }
 
-    const merge  = (left, right) => {
-        let resultArray = [], leftIndex = 0, rightIndex = 0;
-      
+    const merge  = (leftArray, rightArray) => {
+        let resultArray = [], index1 = 0, index2 = 0;
         // We will concatenate values into the resultArray in order
-        while (leftIndex < left.length && rightIndex < right.length) {
-          if (left[leftIndex] < right[rightIndex]) {
-            resultArray.push(left[leftIndex]);
-            leftIndex++; // move left array cursor
-          } else {
-            resultArray.push(right[rightIndex]);
-            rightIndex++; // move right array cursor
-          }
+        while (index1 < leftArray.length && index2 < rightArray.length) {
+            if (leftArray[index1] < rightArray[index2]) {
+                resultArray.push(leftArray[index1]);
+                index1++; // move leftArray cursor
+            } else {
+                resultArray.push(rightArray[index2]);
+                index2++; // move rightArray cursor
+            }
         }
-      
         // We need to concat here because there will be one element remaining
         // from either left OR the right
-        return resultArray.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
+        debugger
+        return resultArray.concat(leftArray.slice(index1)).concat(rightArray.slice(index2));
     }
 
     useEffect(() => {
@@ -61,8 +56,11 @@ const MergeSort = () => {
     return (
         <div className="flex flex-row">
             {testArray.map((value, index) => {
-                return <ArrayBar value={value} index={index}/>
+                return <ArrayBar value={value} index={index} key={index}/>
             })}
+            <button onClick={() => mergeSort(testArray)}>
+                Run
+            </button>
         </div>
     )
 }
