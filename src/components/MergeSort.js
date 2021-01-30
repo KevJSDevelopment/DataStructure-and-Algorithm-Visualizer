@@ -17,6 +17,8 @@ const MergeSort = () => {
         return Math.floor(Math.random() * (max - min + 1) + min)
     }
 
+
+    // Need to change to more complicated merge sort
     const mergeSort = (array) => {
         // No need to sort the array if the array only has one element or empty
         if (array.length <= 1) {
@@ -34,6 +36,7 @@ const MergeSort = () => {
     const merge  = (leftArray, rightArray) => {
         let resultArray = [], index1 = 0, index2 = 0;
         // We will concatenate values into the resultArray in order
+
         while (index1 < leftArray.length && index2 < rightArray.length) {
             if (leftArray[index1] < rightArray[index2]) {
                 resultArray.push(leftArray[index1]);
