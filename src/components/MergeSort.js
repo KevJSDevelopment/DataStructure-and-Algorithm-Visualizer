@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import ArrayBar from './ArrayBar';
+import {getMergeSortAnimations} from '../helperMethods/MergeSort'
 
 const MergeSort = () => {
 
@@ -7,7 +8,7 @@ const MergeSort = () => {
     
     const resetArray = () => {
         const array = []
-        for(let i = 0; i < randomInt(20, 40); i++){
+        for(let i = 0; i < randomInt(20, 100); i++){
             array.push(randomInt(20, 500))
         }
         setTestArray(array)
@@ -17,40 +18,40 @@ const MergeSort = () => {
         return Math.floor(Math.random() * (max - min + 1) + min)
     }
 
+    // Change this value for the speed of the animations.
+    const ANIMATION_SPEED_MS = 100;
+
+    // This is the main color of the array bars.
+    const PRIMARY_COLOR = 'turquoise';
+
+    // This is the color of array bars that are being compared throughout the animations.
+    const SECONDARY_COLOR = 'red';
 
     // Need to change to more complicated merge sort
-    const mergeSort = (array) => {
-        // No need to sort the array if the array only has one element or empty
-        if (array.length <= 1) {
-            return array;
+    const mergeSort = () => {
+        const animations = getMergeSortAnimations(testArray);
+        for (let i = 0; i < animations.length; i++) {
+          const arrayBars = document.getElementsByClassName('array-bar')
+          const isColorChange = i % 3 !== 2;
+          if (isColorChange) {
+            const [barOneIdx, barTwoIdx] = animations[i];
+            const barOneStyle = arrayBars[barOneIdx].style;
+            const barTwoStyle = arrayBars[barTwoIdx].style;
+            const color = i % 3 === 0 ? SECONDARY_COLOR : PRIMARY_COLOR;
+            setTimeout(() => {
+              barOneStyle.backgroundColor = color;
+              barTwoStyle.backgroundColor = color;
+            }, i * ANIMATION_SPEED_MS);
+          } else {
+            setTimeout(() => {
+              const [barOneIdx, newHeight] = animations[i];
+              const barOneStyle = arrayBars[barOneIdx];
+              barOneStyle.style.height = `${newHeight}px`;
+              barOneStyle.innerHTML = `${newHeight}`
+            }, i * ANIMATION_SPEED_MS);
+          }
         }
-        // In order to divide the array in half, we need to figure out the middle
-        const middle = Math.floor(array.length / 2);
-        // This is where we will be dividing the array into left and right
-        const left = array.slice(0, middle);
-        const right = array.slice(middle);
-        // Using recursion to combine the left and right
-        return merge(mergeSort(left), mergeSort(right));
-    }
-
-    const merge  = (leftArray, rightArray) => {
-        let resultArray = [], index1 = 0, index2 = 0;
-        // We will concatenate values into the resultArray in order
-
-        while (index1 < leftArray.length && index2 < rightArray.length) {
-            if (leftArray[index1] < rightArray[index2]) {
-                resultArray.push(leftArray[index1]);
-                index1++; // move leftArray cursor
-            } else {
-                resultArray.push(rightArray[index2]);
-                index2++; // move rightArray cursor
-            }
-        }
-        // We need to concat here because there will be one element remaining
-        // from either left OR the right
-        debugger
-        return resultArray.concat(leftArray.slice(index1)).concat(rightArray.slice(index2));
-    }
+      }
 
     useEffect(() => {
         resetArray()
@@ -61,7 +62,7 @@ const MergeSort = () => {
             {testArray.map((value, index) => {
                 return <ArrayBar value={value} index={index} key={index}/>
             })}
-            <button onClick={() => mergeSort(testArray)}>
+            <button onClick={() => mergeSort()}>
                 Run
             </button>
         </div>
