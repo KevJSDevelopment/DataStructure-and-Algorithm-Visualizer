@@ -19,7 +19,7 @@ const MergeSort = () => {
     }
 
     // Change this value for the speed of the animations.
-    const ANIMATION_SPEED_MS = 100;
+    const ANIMATION_SPEED_MS = 40;
 
     // This is the main color of the array bars.
     const PRIMARY_COLOR = 'turquoise';
