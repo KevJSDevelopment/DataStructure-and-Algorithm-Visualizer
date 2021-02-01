@@ -1,7 +1,7 @@
 import Navbar from './containers/Navbar'
 import Algorithms from './containers/Algorithms'
 
-function App() {
+const App = () => {
   return (
     <div className="App h-screen">
       <div className="grid grid-cols-5 gap-4">
