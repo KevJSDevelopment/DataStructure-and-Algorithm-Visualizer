@@ -49,9 +49,9 @@ const MultiplePointers = () => {
             answer2.style.backgroundColor = "green"
             return true
         } else if(right <= left + 1){
-            setTimeout(() => findSum(left + 1, testArray.length - 1, total, target1, target2), 200)
+            setTimeout(() => findSum(left + 1, testArray.length - 1, total, target1, target2), 20)
         } else{
-            setTimeout(() => findSum(left, right - 1, total, target1, target2), 200)       
+            setTimeout(() => findSum(left, right - 1, total, target1, target2), 20)       
         }
     }
 
