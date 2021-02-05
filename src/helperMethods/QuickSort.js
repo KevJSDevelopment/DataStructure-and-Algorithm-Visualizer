@@ -1,12 +1,12 @@
 function swap(items, leftIndex, rightIndex){
-    var temp = items[leftIndex];
+    let temp = items[leftIndex];
     items[leftIndex] = items[rightIndex];
     items[rightIndex] = temp;
 }
 function partition(items, left, right) {
-    var pivot   = items[Math.floor((right + left) / 2)], //middle element
-        i       = left, //left pointer
-        j       = right; //right pointer
+    let pivot = items[Math.floor((right + left) / 2)], //middle element
+        i = left, //left pointer
+        j = right; //right pointer
     while (i <= j) {
         while (items[i] < pivot) {
             i++;
@@ -23,8 +23,8 @@ function partition(items, left, right) {
     return i;
 }
 
-function quickSort(items, left, right) {
-    var index;
+export const quickSort = (items, left, right) => {
+    let index;
     if (items.length > 1) {
         index = partition(items, left, right); //index returned from partition
         if (left < index - 1) { //more elements on the left side of the pivot
