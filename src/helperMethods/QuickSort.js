@@ -15,7 +15,7 @@ function partition(items, left, right) {
             j--;
         }
         if (i <= j) {
-            swap(items, i, j); //sawpping two elements
+            swap(items, i, j); //swapping two elements
             i++;
             j--;
         }

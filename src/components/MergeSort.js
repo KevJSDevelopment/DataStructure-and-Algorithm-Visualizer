@@ -1,31 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import ArrayBar from './ArrayBar';
 import {getMergeSortAnimations} from '../helperMethods/MergeSort'
+import {resetArray} from '../helperMethods/HelperMethods'
 
 const MergeSort = () => {
 
     const [testArray, setTestArray] = useState([])
-    
-    const resetArray = () => {
-        const array = []
-        for(let i = 0; i < randomInt(20, 100); i++){
-            array.push(randomInt(20, 500))
-        }
-        setTestArray(array)
-    }
-
-    const randomInt = (min, max) => {
-        return Math.floor(Math.random() * (max - min + 1) + min)
-    }
 
     // Change this value for the speed of the animations.
     const ANIMATION_SPEED_MS = 40;
 
     // This is the main color of the array bars.
-    const PRIMARY_COLOR = 'turquoise';
+    const PRIMARY_COLOR = 'whitesmoke';
 
     // This is the color of array bars that are being compared throughout the animations.
-    const SECONDARY_COLOR = 'red';
+    const SECONDARY_COLOR = "rgb(107, 114, 128)";
 
     // Need to change to more complicated merge sort
     const mergeSort = () => {
@@ -54,7 +43,7 @@ const MergeSort = () => {
       }
 
     useEffect(() => {
-        resetArray()
+        setTestArray(resetArray())
     }, [])
 
     return (
