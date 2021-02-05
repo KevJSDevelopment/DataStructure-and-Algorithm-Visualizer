@@ -11,10 +11,10 @@ const MergeSort = () => {
     const ANIMATION_SPEED_MS = 40;
 
     // This is the main color of the array bars.
-    const PRIMARY_COLOR = 'whitesmoke';
+    const PRIMARY_COLOR = "rgb(107, 114, 128)";
 
     // This is the color of array bars that are being compared throughout the animations.
-    const SECONDARY_COLOR = "rgb(107, 114, 128)";
+    const SECONDARY_COLOR = 'whitesmoke';
 
     // Need to change to more complicated merge sort
     const mergeSort = () => {
