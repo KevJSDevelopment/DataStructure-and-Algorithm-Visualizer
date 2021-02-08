@@ -5,6 +5,8 @@ const QuickSort = () => {
 
     const [testArray, setTestArray] = useState([])
 
+    const speed = 10
+
     useEffect(() => {
         setTestArray(resetArray())
         return () => {
