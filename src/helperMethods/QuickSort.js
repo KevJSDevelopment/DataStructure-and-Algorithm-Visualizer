@@ -1,9 +1,10 @@
-function swap(items, leftIndex, rightIndex){
+const swap = (items, leftIndex, rightIndex) => {
     let temp = items[leftIndex];
     items[leftIndex] = items[rightIndex];
     items[rightIndex] = temp;
 }
-function partition(items, left, right) {
+
+const partition = (items, left, right) => {
     let pivot = items[Math.floor((right + left) / 2)], //middle element
         i = left, //left pointer
         j = right; //right pointer
