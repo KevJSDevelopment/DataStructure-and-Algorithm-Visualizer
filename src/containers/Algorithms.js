@@ -3,6 +3,7 @@ import MultiplePointers from '../components/MultiplePointers'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import Home from '../components/Home';
 import MergeSort from '../components/MergeSort';
+import QuickSort from '../components/QuickSort';
 
 const Algorithms = () => {
     
@@ -13,6 +14,7 @@ const Algorithms = () => {
                     <Route path="/" exact render={() => <Home /> }/>
                     <Route path="/multiple-pointers" exact render={() => <MultiplePointers /> }/> 
                     <Route path="/merge-sort" exact render={() => <MergeSort /> }/> 
+                    <Route path="/quick-sort" exact render={() => <QuickSort /> }/> 
                     <Redirect to="/"/>
                 </Switch>
             </Router>
