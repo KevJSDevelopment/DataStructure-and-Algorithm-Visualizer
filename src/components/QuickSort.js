@@ -10,6 +10,7 @@ const QuickSort = () => {
     const swap = (items, leftIndex, rightIndex) => {
         const leftP = document.getElementById(`bar-${leftIndex}`)
         const rightP = document.getElementById(`bar-${rightIndex}`)
+        console.log(leftP, rightP)
         let temp = items[leftIndex];
         
         leftP.style.height = `${items[rightIndex]}px`
@@ -49,12 +50,12 @@ const QuickSort = () => {
             if (left < index - 1) { //more elements on the left side of the pivot
                 setTimeout(() => {
                     quickSort(items, left, index - 1)
-                }, 200);
+                }, 200)
             }
             if (index < right) { //more elements on the right side of the pivot
                 setTimeout(() => {
                     quickSort(items, index, right)
-                }, 200);
+                }, 200)
             }
         }
         return items;
