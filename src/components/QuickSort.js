@@ -41,7 +41,7 @@ const QuickSort = () => {
                 j--;
             }
             if (i <= j) {
-                setTimeout(() => swap(items, i, j), 20); //swapping two elements
+                swap(items, i, j) //swapping two elements
                 i++;
                 j--;
             }
