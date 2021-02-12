@@ -8,17 +8,16 @@ const QuickSort = () => {
     const [testArray, setTestArray] = useState([])
 
     const swap = (items, leftIndex, rightIndex) => {
+        const leftP = document.getElementById(`bar-${leftIndex}`)
+        const rightP = document.getElementById(`bar-${rightIndex}`)
         let temp = items[leftIndex];
-        let leftP = document.getElementById(`bar-${leftIndex}`)
-        let rightP = document.getElementById(`bar-${rightIndex}`)
         
         leftP.style.height = `${items[rightIndex]}px`
         leftP.innerHTML = items[rightIndex]
     
         items[leftIndex] = items[rightIndex];
-
-        leftP.style.height = `${temp}px`
-        leftP.innerHTML = temp
+        rightP.style.height = `${temp}px`
+        rightP.innerHTML = temp
         items[rightIndex] = temp;
     }
     
@@ -26,22 +25,16 @@ const QuickSort = () => {
         let pivot = items[Math.floor((right + left) / 2)], //middle element
         i = left, //left pointer
         j = right //right pointer
-
-        let leftP = document.getElementById(`bar-${i}`)
-        let rightP = document.getElementById(`bar-${j}`)
-
-        leftP.style.backgroundColor = "red"
-        rightP.style.backgroundColor = "skyblue"
     
         while (i <= j) {
             while (items[i] < pivot) {
-                i++;
+                i++
             }
             while (items[j] > pivot) {
-                j--;
+                j--
             }
             if (i <= j) {
-                swap(items, i, j) //swapping two elements
+                swap(items, i, j)//swapping two elements
                 i++;
                 j--;
             }
@@ -54,10 +47,14 @@ const QuickSort = () => {
         if (items.length > 1) {
             index = partition(items, left, right); //index returned from partition
             if (left < index - 1) { //more elements on the left side of the pivot
-                setTimeout(() => quickSort(items, left, index - 1), 100);
+                setTimeout(() => {
+                    quickSort(items, left, index - 1)
+                }, 200);
             }
             if (index < right) { //more elements on the right side of the pivot
-                setTimeout(() => quickSort(items, index, right), 100);
+                setTimeout(() => {
+                    quickSort(items, index, right)
+                }, 200);
             }
         }
         return items;
