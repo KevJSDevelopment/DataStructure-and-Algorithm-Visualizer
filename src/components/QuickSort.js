@@ -5,72 +5,75 @@ import ArrayBar from './ArrayBar'
 
 const QuickSort = () => {
 
-    const [testArray, setTestArray] = useState([])
-
-    const swap = (items, leftIndex, rightIndex) => {
-        const leftP = document.getElementById(`bar-${leftIndex}`)
-        const rightP = document.getElementById(`bar-${rightIndex}`)
-        console.log(leftP, rightP)
-        let temp = items[leftIndex];
+    const [values, setValues] = useState([])
+    async function quickSort(arr, start, end) {
+        if (start >= end) {
+            return;
+        }
+        let index = await partition(arr, start, end);
+        document.getElementById(`bar-${index}`).style.backgroundColor = "#D1D5DB"
         
-        leftP.style.height = `${items[rightIndex]}px`
-        leftP.innerHTML = items[rightIndex]
-    
-        items[leftIndex] = items[rightIndex];
-        rightP.style.height = `${temp}px`
-        rightP.innerHTML = temp
-        items[rightIndex] = temp;
+        await Promise.all([
+            quickSort(arr, start, index - 1),
+            quickSort(arr, index + 1, end)
+        ]);
     }
     
-    const partition = (items, left, right) => {
-        let pivot = items[Math.floor((right + left) / 2)], //middle element
-        i = left, //left pointer
-        j = right //right pointer
-    
-        while (i <= j) {
-            while (items[i] < pivot) {
-                i++
-            }
-            while (items[j] > pivot) {
-                j--
-            }
-            if (i <= j) {
-                swap(items, i, j)//swapping two elements
-                i++;
-                j--;
+    async function partition(arr, start, end) {
+        for (let i = start; i < end; i++) {
+            document.getElementById(`bar-${i}`).style.backgroundColor = "#D6FFB7"
+        }
+        
+        let pivotValue = arr[end];
+        let pivotIndex = start;
+        document.getElementById(`bar-${pivotIndex}`).style.backgroundColor = "#E0777D"
+        for (let i = start; i < end; i++) {
+            if (arr[i] < pivotValue) {
+            await swap(arr, i, pivotIndex);
+            document.getElementById(`bar-${pivotIndex}`).style.backgroundColor = "#D1D5DB"
+            pivotIndex++;
+            document.getElementById(`bar-${pivotIndex}`).style.backgroundColor = "#E0777D"
             }
         }
-        return i;
+        await swap(arr, pivotIndex, end);
+        
+        for (let i = start; i < end; i++) {
+            if (i != pivotIndex) {
+                document.getElementById(`bar-${i}`).style.backgroundColor = "#D1D5DB"
+            }
+        }
+        
+        return pivotIndex;
     }
     
-    const quickSort = (items, left, right) => {
-        let index;
-        if (items.length > 1) {
-            index = partition(items, left, right); //index returned from partition
-            if (left < index - 1) { //more elements on the left side of the pivot
-                setTimeout(() => {
-                    quickSort(items, left, index - 1)
-                }, 200)
-            }
-            if (index < right) { //more elements on the right side of the pivot
-                setTimeout(() => {
-                    quickSort(items, index, right)
-                }, 200)
-            }
-        }
-        return items;
+    async function swap(arr, a, b) {
+        await sleep(750);
+        let temp = arr[a];
+        arr[a] = arr[b];
+        arr[b] = temp;
+        const element1 = document.getElementById(`bar-${a}`)
+        element1.style.height = `${arr[a]}px`
+        element1.innerHTML = arr[a]
+
+        const element2 = document.getElementById(`bar-${b}`)
+        element2.style.height = `${arr[b]}px`
+        element2.innerHTML = arr[b]
+    }
+    
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
 
     useEffect(() => {
-        setTestArray(resetArray())
+        setValues(resetArray())
     }, [])
 
     return (
         <div className="flex flex-row">
-            {testArray.map((value, index) => {
+            {values.map((value, index) => {
                 return <ArrayBar value={value} index={index} key={index}/>
             })}
-            <button onClick={() => quickSort(testArray, 0, testArray.length - 1)}>
+            <button onClick={() => quickSort(values, 0, values.length - 1)}>
                 Run
             </button>
         </div>
