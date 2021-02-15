@@ -20,7 +20,7 @@ const QuickSort = () => {
     }
     
     async function partition(arr, start, end) {
-        for (let i = start; i < end; i++) {
+        for (let i = start; i <= end; i++) {
             document.getElementById(`bar-${i}`).style.backgroundColor = "#D6FFB7"
         }
         
