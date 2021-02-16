@@ -16,6 +16,8 @@ const BubbleSort = () => {
                     document.getElementById(`bar-${i}`).style.backgroundColor = "#E0777D"
                     document.getElementById(`bar-${j}`).style.backgroundColor = "#E0777D"
                     await swap(values, i, j)
+                    document.getElementById(`bar-${i}`).style.backgroundColor = "#D1D5DB"
+                    document.getElementById(`bar-${j}`).style.backgroundColor = "#D1D5DB"
                 }
             }
         }
