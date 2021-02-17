@@ -52,7 +52,10 @@ const LinkedList = () => {
         setLast(value)
         const container = document.querySelector("#node-container")
         const div = document.createElement("div")
-        div.className = "single-node"
+        div.style.marginLeft = "1%"
+        div.style.borderRadius = "50%"
+        div.style.padding = "1%"
+        div.style.border = '2px solid darkgray'
         div.innerHTML = value
         container.append(div)
         list.push(value)
