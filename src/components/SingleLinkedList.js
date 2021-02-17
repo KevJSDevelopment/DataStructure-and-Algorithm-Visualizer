@@ -45,9 +45,16 @@ class DoublyLinkedList {
 const LinkedList = () => {
 
     const [list, setList] = useState(new SinglyLinkedList())
+    const [last, setLast] = useState(list.head)
 
     const addToList = () => {
-        const value = list.head + 1
+        const value = last + 1
+        setLast(value)
+        const container = document.querySelector("#node-container")
+        const div = document.createElement("div")
+        div.className = "single-node"
+        div.innerHTML = value
+        container.append(div)
         list.push(value)
     }
 
@@ -57,6 +64,9 @@ const LinkedList = () => {
 
     return (
         <div>
+            <div id="node-container" className="flex flex-row">
+
+            </div>
             <button onClick={() => addToList()}> Add 1 to list</button>
         </div>
     )
