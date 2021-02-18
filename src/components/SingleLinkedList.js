@@ -76,10 +76,8 @@ const LinkedList = () => {
                 const oldTail = document.getElementById("div-tail")
                 oldTail.id = `node-${list.tail.value}`
                 oldTail.style.borderColor = "darkgray"
-                if(list.length > 1){
-                    const lastSpacer = document.getElementById("last-spacer")
-                    lastSpacer.id = `spacer-${list.length - 1}`
-                }
+                const lastSpacer = document.getElementById("last-spacer")
+                lastSpacer.id = `spacer-${list.length - 1}`
             }
             const spacer = document.createElement("div")
             spacer.innerHTML = "-->"
@@ -106,26 +104,35 @@ const LinkedList = () => {
 
     const removeFromList = () => {
         const container = document.querySelector("#node-container")
-        if(list.length === 0) return;
-        list.pop()
-        if(list.length > 0){
-            const oldTail = document.getElementById("div-tail")
-            const newTail = document.getElementById(`node-${list.tail.value}`)
-            newTail.id = "div-tail"
-            container.removeChild(oldTail)
-            if(list.length >= 1){
-                const lastSpacer = document.getElementById("last-spacer")
-                container.removeChild(lastSpacer)
-                if(list.length !== 1){
-                    const newSpacerEnd = document.getElementById(`spacer-${list.length - 1}`)
-                    newSpacerEnd.id = "last-spacer"
-                }
-            }
-        } 
-        if(list.length === 0){
-            const oldTail = document.getElementById("div-tail")
-            container.removeChild(oldTail)
+        if(list.length === 0) {
+            return
         }
+
+        const value = last - 1
+        list.pop()
+
+        if(list.length === 0){
+            const head = document.getElementById("div-head")
+            container.removeChild(head)
+        }
+        else {
+            const oldTail = document.getElementById("div-tail")
+            container.removeChild(oldTail)
+
+            const oldLastSpacer = document.getElementById("last-spacer")
+            container.removeChild(oldLastSpacer)
+
+            if(list.length !== 1){
+                const newTail = document.getElementById(`node-${list.tail.value}`)
+                newTail.id = "div-tail"
+                newTail.style.borderColor = "lightgreen"
+    
+                const newLastSpacer = document.getElementById(`spacer-${list.length - 1}`)
+                newLastSpacer.id = "last-spacer"
+            }
+        }
+        setLast(value)
+        
     }
 
     useEffect(() => {
