@@ -45,20 +45,28 @@ class DoublyLinkedList {
 const LinkedList = () => {
 
     const [list, setList] = useState(new SinglyLinkedList())
-    const [last, setLast] = useState(list.head)
+    const [last, setLast] = useState(list.tail)
 
     const addToList = () => {
         const value = last + 1
-        setLast(value)
         const container = document.querySelector("#node-container")
         const div = document.createElement("div")
+        const spacer = document.createElement("div")
+        spacer.innerHTML = "-->"
+        spacer.style.textAlign = "center"
+        spacer.style.marginTop = "1%"
+        spacer.style.marginLeft = "1%"
         div.style.marginLeft = "1%"
         div.style.borderRadius = "50%"
         div.style.padding = "1%"
         div.style.border = '2px solid darkgray'
         div.innerHTML = value
+        if(list.head){
+            container.append(spacer)
+        }
         container.append(div)
         list.push(value)
+        setLast(value)
     }
 
     useEffect(() => {
