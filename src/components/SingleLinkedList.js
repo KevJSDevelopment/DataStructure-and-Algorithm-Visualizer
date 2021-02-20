@@ -70,7 +70,7 @@ const LinkedList = () => {
     const [last, setLast] = useState(0)
 
     
-    const addToList = () => {
+    const push = () => {
         const value = last + 1
         const container = document.querySelector("#node-container")
         if(list.length === 0){
@@ -113,7 +113,7 @@ const LinkedList = () => {
         
     }
 
-    const removeFromList = () => {
+    const pop = () => {
         const container = document.querySelector("#node-container")
         if(list.length === 0) {
             return
@@ -155,8 +155,8 @@ const LinkedList = () => {
             <div id="node-container" className="flex flex-row h-24">
 
             </div>
-            <button onClick={() => addToList()}> Add 1 to list</button>
-            <button onClick={() => removeFromList()}> Remove 1 from list</button>
+            <button onClick={() => push()}> Add 1 to list</button>
+            <button onClick={() => pop()}> Remove 1 from list</button>
         </div>
     )
 }
