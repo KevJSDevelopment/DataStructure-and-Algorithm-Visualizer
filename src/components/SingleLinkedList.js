@@ -141,7 +141,7 @@ const LinkedList = () => {
 
     return (
         <div>
-            <div id="node-container" className="flex flex-row">
+            <div id="node-container" className="flex flex-row h-24">
 
             </div>
             <button onClick={() => addToList()}> Add 1 to list</button>
