@@ -69,10 +69,10 @@ const LinkedList = () => {
     const [list, setList] = useState(new SinglyLinkedList())
     const [last, setLast] = useState(0)
 
+    const container = document.querySelector("#node-container")
     
     const push = () => {
         const value = last + 1
-        const container = document.querySelector("#node-container")
         if(list.length === 0){
             const div = document.createElement("div")
             div.style.marginLeft = "1%"
@@ -114,7 +114,6 @@ const LinkedList = () => {
     }
 
     const pop = () => {
-        const container = document.querySelector("#node-container")
         if(list.length === 0) {
             return
         }
@@ -146,6 +145,16 @@ const LinkedList = () => {
         
     }
 
+    const shift = () => {
+        const newHead = document.getElementById(`node-${list.head.next.value}`)
+        newHead.style.borderColor = "blue"
+        const oldHead = document.getElementById("div-head")
+        container.removeChild(oldHead)
+        const oldSpacer = document.getElementById(`spacer-${list.head.value}`)
+        container.removeChild(oldSpacer)
+        list.shift()
+    }
+
     useEffect(() => {
         list.head = 0
     }, [])
@@ -155,8 +164,10 @@ const LinkedList = () => {
             <div id="node-container" className="flex flex-row h-24">
 
             </div>
-            <button onClick={() => push()}> Add 1 to list</button>
-            <button onClick={() => pop()}> Remove 1 from list</button>
+            <button onClick={() => push()}> Push</button>
+            <button onClick={() => pop()}> Pop</button>
+            <button onClick={() => shift()}> Shift</button>
+            <button onClick={() => unshift()}> Unshift</button>
         </div>
     )
 }
