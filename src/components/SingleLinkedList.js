@@ -68,10 +68,9 @@ const LinkedList = () => {
 
     const [list, setList] = useState(new SinglyLinkedList())
     const [last, setLast] = useState(0)
-
-    const container = document.querySelector("#node-container")
     
     const push = () => {
+        const container = document.querySelector("#node-container")
         const value = last + 1
         if(list.length === 0){
             const div = document.createElement("div")
@@ -80,7 +79,7 @@ const LinkedList = () => {
             div.style.padding = "1%"
             div.style.border = '2px solid blue'
             div.innerHTML = value
-            div.id = "div-head"
+            div.id = "node-head"
             container.append(div)
         } else {
             if(list.length > 1){
@@ -103,7 +102,7 @@ const LinkedList = () => {
             div.style.padding = "1%"
             div.style.border = '2px solid lightgreen'
             div.innerHTML = value
-            div.id = "div-tail"
+            div.id = "node-tail"
 
             container.append(spacer)
             container.append(div)
@@ -114,6 +113,7 @@ const LinkedList = () => {
     }
 
     const pop = () => {
+        const container = document.querySelector("#node-container")
         if(list.length === 0) {
             return
         }
@@ -122,7 +122,7 @@ const LinkedList = () => {
         list.pop()
 
         if(list.length === 0){
-            const head = document.getElementById("div-head")
+            const head = document.getElementById("node-head")
             container.removeChild(head)
         }
         else {
@@ -134,7 +134,7 @@ const LinkedList = () => {
 
             if(list.length !== 1){
                 const newTail = document.getElementById(`node-${list.tail.value}`)
-                newTail.id = "div-tail"
+                newTail.id = "node-tail"
                 newTail.style.borderColor = "lightgreen"
     
                 const newLastSpacer = document.getElementById(`spacer-${list.length - 1}`)
@@ -146,12 +146,24 @@ const LinkedList = () => {
     }
 
     const shift = () => {
-        const newHead = document.getElementById(`node-${list.head.next.value}`)
-        newHead.style.borderColor = "blue"
-        const oldHead = document.getElementById("div-head")
+        const container = document.querySelector("#node-container")
+
+        const oldHead = document.getElementById("node-head")
         container.removeChild(oldHead)
-        const oldSpacer = document.getElementById(`spacer-${list.head.value}`)
-        container.removeChild(oldSpacer)
+        if(list.length > 2){
+            const newHead = document.getElementById(`node-${list.head.next.value}`)
+            newHead.style.borderColor = "blue"
+            newHead.id = "node-head"
+            const oldSpacer = document.getElementById(`spacer-${list.head.value}`)
+            container.removeChild(oldSpacer)
+        }
+        else if(list.length === 2){
+            const newHead = document.getElementById(`node-tail`)
+            newHead.style.borderColor = "blue"
+            newHead.id = "node-head"
+            const oldSpacer = document.getElementById(`last-spacer`)
+            container.removeChild(oldSpacer)
+        }
         list.shift()
     }
 
@@ -161,13 +173,13 @@ const LinkedList = () => {
 
     return (
         <div>
-            <div id="node-container" className="flex flex-row h-24">
+            <div id="node-container" className="flex flex-row">
 
             </div>
-            <button onClick={() => push()}> Push</button>
-            <button onClick={() => pop()}> Pop</button>
-            <button onClick={() => shift()}> Shift</button>
-            <button onClick={() => unshift()}> Unshift</button>
+            <button className="ml-2" onClick={() => push()}> Push</button>
+            <button className="ml-2"onClick={() => pop()}> Pop</button>
+            <button className="ml-2"onClick={() => shift()}> Shift</button>
+            {/* <button onClick={() => unshift()}> Unshift</button> */}
         </div>
     )
 }
