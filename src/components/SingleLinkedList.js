@@ -58,8 +58,13 @@ class SinglyLinkedList {
 
         return oldHead
     }
-    unshift() {
-        
+    unshift(value) {
+        if(!this.head){
+            this.push(value)
+            return
+        }
+
+
     }
 }
 
