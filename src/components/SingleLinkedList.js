@@ -83,7 +83,7 @@ const LinkedList = () => {
             container.append(div)
         } else {
             if(list.length > 1){
-                const oldTail = document.getElementById("div-tail")
+                const oldTail = document.getElementById("node-tail")
                 oldTail.id = `node-${list.tail.value}`
                 oldTail.style.borderColor = "darkgray"
                 const lastSpacer = document.getElementById("last-spacer")
@@ -126,7 +126,7 @@ const LinkedList = () => {
             container.removeChild(head)
         }
         else {
-            const oldTail = document.getElementById("div-tail")
+            const oldTail = document.getElementById("node-tail")
             container.removeChild(oldTail)
 
             const oldLastSpacer = document.getElementById("last-spacer")
@@ -146,8 +146,8 @@ const LinkedList = () => {
     }
 
     const shift = () => {
+        if(list.length <= 0) return;
         const container = document.querySelector("#node-container")
-
         const oldHead = document.getElementById("node-head")
         container.removeChild(oldHead)
         if(list.length > 2){
@@ -164,6 +164,8 @@ const LinkedList = () => {
             const oldSpacer = document.getElementById(`last-spacer`)
             container.removeChild(oldSpacer)
         }
+        const value = last - 1
+        setLast(value)
         list.shift()
     }
 
