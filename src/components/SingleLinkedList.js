@@ -58,6 +58,9 @@ class SinglyLinkedList {
 
         return oldHead
     }
+    unshift() {
+        
+    }
 }
 
 class DoublyLinkedList {
@@ -169,6 +172,10 @@ const LinkedList = () => {
         list.shift()
     }
 
+    const unshift = () => {
+
+    }
+
     useEffect(() => {
         list.head = 0
     }, [])
@@ -179,9 +186,9 @@ const LinkedList = () => {
 
             </div>
             <button className="ml-2" onClick={() => push()}> Push</button>
-            <button className="ml-2"onClick={() => pop()}> Pop</button>
-            <button className="ml-2"onClick={() => shift()}> Shift</button>
-            {/* <button onClick={() => unshift()}> Unshift</button> */}
+            <button className="ml-2" onClick={() => pop()}> Pop</button>
+            <button className="ml-2" onClick={() => shift()}> Shift</button>
+            <button className="ml-2" onClick={() => unshift()}> Unshift</button>
         </div>
     )
 }
