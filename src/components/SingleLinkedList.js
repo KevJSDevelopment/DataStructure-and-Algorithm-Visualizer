@@ -80,11 +80,10 @@ class DoublyLinkedList {
 const LinkedList = () => {
 
     const [list, setList] = useState(new SinglyLinkedList())
-    const [last, setLast] = useState(0)
     
     const push = () => {
         const container = document.querySelector("#node-container")
-        const value = last + 1
+        const value = list.length + 1
         if(list.length === 0){
             const div = document.createElement("div")
             div.style.marginLeft = "1%"
@@ -93,6 +92,7 @@ const LinkedList = () => {
             div.style.border = '2px solid blue'
             div.innerHTML = value
             div.id = "node-head"
+            div.className = "node"
             container.append(div)
         } else {
             if(list.length > 1){
@@ -108,6 +108,7 @@ const LinkedList = () => {
             spacer.style.marginTop = "1%"
             spacer.style.marginLeft = "1%"
             spacer.id = "last-spacer"
+            spacer.className = "spacer"
             
             const div = document.createElement("div")
             div.style.marginLeft = "1%"
@@ -116,13 +117,12 @@ const LinkedList = () => {
             div.style.border = '2px solid lightgreen'
             div.innerHTML = value
             div.id = "node-tail"
+            div.className = "node"
 
             container.append(spacer)
             container.append(div)
         }
         list.push(value)
-        setLast(value)
-        
     }
 
     const pop = () => {
@@ -130,8 +130,6 @@ const LinkedList = () => {
         if(list.length === 0) {
             return
         }
-
-        const value = last - 1
         list.pop()
 
         if(list.length === 0){
@@ -154,7 +152,6 @@ const LinkedList = () => {
                 newLastSpacer.id = "last-spacer"
             }
         }
-        setLast(value)
         
     }
 
@@ -177,12 +174,67 @@ const LinkedList = () => {
             const oldSpacer = document.getElementById(`last-spacer`)
             container.removeChild(oldSpacer)
         }
-        const value = last - 1
-        setLast(value)
         list.shift()
     }
 
     const unshift = () => {
+        if(list.length === 0) return push()
+        else {
+            const nodes = document.querySelectorAll(".node")
+            const spacers = document.querySelectorAll(".spacer")
+
+            nodes.forEach((node, index) => {
+                node.innerHTML = `${(node.innerHTML - 0) + 1}`
+
+                if(index === nodes.length - 1){
+                    node.style.borderColor = "lightgreen"
+                    return;
+                }
+                else {
+                    node.id = `node-${node.innerHTML}`
+                    node.style.borderColor = "darkgray"
+                }
+            })
+
+            spacers.forEach((spacer, index) => {
+                if(index === spacers.length - 1){
+                    return;
+                }
+                else {
+                    spacer.id = `spacer-${index + 2}`
+                }
+            })
+
+            const container = document.querySelector("#node-container")
+            const value = 1
+            
+            const div = document.createElement("div")
+            div.style.marginLeft = "1%"
+            div.style.borderRadius = "50%"
+            div.style.padding = "1%"
+            div.style.border = '2px solid blue'
+            div.innerHTML = value
+            div.className = "node"
+            div.id = "node-head"
+            
+            const spacer = document.createElement("div")
+            spacer.innerHTML = "-->"
+            spacer.style.textAlign = "center"
+            spacer.style.marginTop = "1%"
+            spacer.style.marginLeft = "1%"
+            spacer.className = "spacer"
+
+            if(list.length === 1){
+                spacer.id = "last-spacer"
+            }
+            else {
+                spacer.id = `spacer-1`
+            }
+
+            container.prepend(spacer)
+            container.prepend(div)
+            list.unshift(value)
+        }
 
     }
 
