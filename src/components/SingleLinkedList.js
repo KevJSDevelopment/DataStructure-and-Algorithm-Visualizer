@@ -83,8 +83,8 @@ const LinkedList = () => {
     
     const push = () => {
         const container = document.querySelector("#node-container")
-        const value = list.length + 1
         if(list.length === 0){
+            const value = 1
             const div = document.createElement("div")
             div.style.marginLeft = "1%"
             div.style.borderRadius = "50%"
@@ -94,6 +94,7 @@ const LinkedList = () => {
             div.id = "node-head"
             div.className = "node"
             container.append(div)
+            list.push(value)
         } else {
             if(list.length > 1){
                 const oldTail = document.getElementById("node-tail")
@@ -102,6 +103,7 @@ const LinkedList = () => {
                 const lastSpacer = document.getElementById("last-spacer")
                 lastSpacer.id = `spacer-${list.length - 1}`
             }
+            const value = list.tail.value + 1
             const spacer = document.createElement("div")
             spacer.innerHTML = "-->"
             spacer.style.textAlign = "center"
@@ -121,8 +123,8 @@ const LinkedList = () => {
 
             container.append(spacer)
             container.append(div)
+            list.push(value)
         }
-        list.push(value)
     }
 
     const pop = () => {
@@ -156,19 +158,32 @@ const LinkedList = () => {
     }
 
     const shift = () => {
-        if(list.length <= 0) return;
+        if(list.length === 0) return;
         const container = document.querySelector("#node-container")
         const oldHead = document.getElementById("node-head")
         container.removeChild(oldHead)
         if(list.length > 2){
-            const newHead = document.getElementById(`node-${list.head.next.value}`)
+            const spacers = document.querySelectorAll(".spacer")
+
+            spacers.forEach((spacer, index) => {
+                // debugger
+                if(index === spacers.length - 1){
+                    return;
+                } 
+                else {
+                    spacer.id = `spacer-${index}`
+                }
+            })
+
+            const newHead = document.getElementById(`node-${list.head.value + 1}`)
             newHead.style.borderColor = "blue"
             newHead.id = "node-head"
-            const oldSpacer = document.getElementById(`spacer-${list.head.value}`)
+            // debugger
+            const oldSpacer = document.getElementById("spacer-0")
             container.removeChild(oldSpacer)
         }
         else if(list.length === 2){
-            const newHead = document.getElementById(`node-tail`)
+            const newHead = document.getElementById("node-tail")
             newHead.style.borderColor = "blue"
             newHead.id = "node-head"
             const oldSpacer = document.getElementById(`last-spacer`)
@@ -183,30 +198,9 @@ const LinkedList = () => {
             const nodes = document.querySelectorAll(".node")
             const spacers = document.querySelectorAll(".spacer")
 
-            nodes.forEach((node, index) => {
-                node.innerHTML = `${(node.innerHTML - 0) + 1}`
-
-                if(index === nodes.length - 1){
-                    node.style.borderColor = "lightgreen"
-                    return;
-                }
-                else {
-                    node.id = `node-${node.innerHTML}`
-                    node.style.borderColor = "darkgray"
-                }
-            })
-
-            spacers.forEach((spacer, index) => {
-                if(index === spacers.length - 1){
-                    return;
-                }
-                else {
-                    spacer.id = `spacer-${index + 2}`
-                }
-            })
-
             const container = document.querySelector("#node-container")
-            const value = 1
+
+            const value = list.head.value - 1
             
             const div = document.createElement("div")
             div.style.marginLeft = "1%"
@@ -230,6 +224,29 @@ const LinkedList = () => {
             else {
                 spacer.id = `spacer-1`
             }
+
+            nodes.forEach((node, index) => {
+                node.innerHTML = `${value + index + 1}`
+
+                if(index === nodes.length - 1){
+                    node.style.borderColor = "lightgreen"
+                    return;
+                }
+                else {
+                    node.id = `node-${node.innerHTML}`
+                    node.style.borderColor = "darkgray"
+                }
+            })
+
+            spacers.forEach((spacer, index) => {
+                if(index === spacers.length - 1){
+                    return;
+                }
+                else {
+                    spacer.id = `spacer-${index + 2}`
+                }
+            })
+
 
             container.prepend(spacer)
             container.prepend(div)
