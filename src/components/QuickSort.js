@@ -6,6 +6,7 @@ import ArrayBar from './ArrayBar'
 const QuickSort = () => {
 
     const [values, setValues] = useState([])
+    const ANIMATION_SPEED = 100
     async function quickSort(arr, start, end) {
         if (start >= end) {
             return;
@@ -47,7 +48,7 @@ const QuickSort = () => {
     }
     
     async function swap(arr, a, b) {
-        await sleep(750);
+        await sleep(ANIMATION_SPEED);
         let temp = arr[a];
         arr[a] = arr[b];
         arr[b] = temp;

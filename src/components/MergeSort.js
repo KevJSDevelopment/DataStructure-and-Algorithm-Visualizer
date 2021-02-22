@@ -8,7 +8,7 @@ const MergeSort = () => {
     const [testArray, setTestArray] = useState([])
 
     // Change this value for the speed of the animations.
-    const ANIMATION_SPEED_MS = 250;
+    const ANIMATION_SPEED_MS = 20;
 
     // This is the main color of the array bars.
     const PRIMARY_COLOR = "rgb(107, 114, 128)";
