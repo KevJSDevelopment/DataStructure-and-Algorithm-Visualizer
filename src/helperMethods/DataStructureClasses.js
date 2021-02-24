@@ -6,6 +6,17 @@ class ListNode {
     }
 }
 
+
+class TreeNode {
+    constructor(value) {
+        this.value = value;
+        this.left = null;
+        this.right = null;
+        this.frequency = 0
+    }
+}
+
+
 export  class SinglyLinkedList {
     constructor() {
         this.head = null;
@@ -74,15 +85,6 @@ export  class SinglyLinkedList {
 
 export class DoublyLinkedList {
 
-}
-
-class TreeNode {
-    constructor(value) {
-        this.value = value;
-        this.left = null;
-        this.right = null;
-        this.frequency = 0
-    }
 }
 
 export class BinaryTree {
