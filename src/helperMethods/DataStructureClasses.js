@@ -1,4 +1,4 @@
-export class Node {
+class ListNode {
     constructor(value){
         this.value = value
         this.next = null
@@ -13,7 +13,7 @@ export  class SinglyLinkedList {
         this.length = 0;
     }
     push(value){
-        let newNode = new Node(value)
+        let newNode = new ListNode(value)
         if(!this.head){
             this.head = newNode
             this.tail = this.head
@@ -58,7 +58,7 @@ export  class SinglyLinkedList {
         return oldHead
     }
     unshift(value) {
-        const newNode = new Node(value)
+        const newNode = new ListNode(value)
         if(!this.head){
             this.head = newNode
             this.tail = this.head
@@ -76,6 +76,49 @@ export class DoublyLinkedList {
 
 }
 
-export class BinaryTree {
+class TreeNode {
+    constructor(value) {
+        this.value = value;
+        this.left = null;
+        this.right = null;
+        this.frequency = 0
+    }
+}
 
+export class BinaryTree {
+    constructor() {
+        this.root = null;
+    }
+
+    insert(value) {
+        const newNode = new TreeNode(value)
+        if(!this.root) {
+            this.root = newNode
+            return this
+        }
+
+        let current = this.root
+        while(current !== null){
+            if(current.value > newNode.value){
+                if(current.left === null){
+                    current.left = newNode
+                    return this
+                }
+                else{
+                    current = current.left
+                }
+            }
+            else if(current.value < newNode.value){
+                if(current.right === null){
+                    current.left = newNode
+                    return this
+                }
+                else {
+                    current = current.right
+                }
+            } else {
+                current.frequency += 1
+            }
+        }
+    }
 }
