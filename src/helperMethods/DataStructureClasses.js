@@ -104,21 +104,37 @@ export class BinaryTree {
                     current.left = newNode
                     return this
                 }
-                else{
-                    current = current.left
-                }
+                current = current.left
             }
             else if(current.value < newNode.value){
                 if(current.right === null){
                     current.left = newNode
                     return this
                 }
-                else {
-                    current = current.right
-                }
+                current = current.right
             } else {
                 current.frequency += 1
+                return this
             }
+        }
+    }
+
+    find(value, node = this.root){
+        if(!node){
+            return false
+        }
+
+        if(value === node.value){
+            return node
+        }
+        else if(value < node.value){
+            this.find(value, node.left)
+        }
+        else if(value > node.value){
+            this.find(value, node.right)
+        }
+        else{
+            return false
         }
     }
 }
