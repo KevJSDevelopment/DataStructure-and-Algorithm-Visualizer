@@ -6,6 +6,7 @@ import MergeSort from '../components/MergeSort';
 import QuickSort from '../components/QuickSort';
 import BubbleSort from '../components/BubbleSort';
 import LinkedList from '../components/SingleLinkedList';
+import BinarySearchTree from '../components/BinaryTree';
 
 const Algorithms = () => {
     
@@ -18,6 +19,7 @@ const Algorithms = () => {
                 <Route path="/quick-sort" exact render={() => <QuickSort /> }/> 
                 <Route path="/bubble-sort" exact render={() => <BubbleSort /> }/> 
                 <Route path="/linked-list" exact render={() => <LinkedList /> }/>
+                <Route path="/binary-tree" component={BinarySearchTree}/>
                 <Redirect to="/"/>
             </Switch>
         </div>
