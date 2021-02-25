@@ -9,29 +9,23 @@ class BinaryTree {
     insert(value) {
         const newNode = new TreeNode(value)
 
-        //Used to render node onto page in correct position
-        const canvas = document.getElementById("tree-canvas")
         if(!this.root) {
+            //location on canvas for root node
+            const x = Math.floor((window.innerWidth * .9) / 2)
+            const y = 50
+            const w = 18
+
+            //assign the node position points so they can be referenced later
+            newNode.x = x
+            newNode.y = y
+
+            drawNode(value, x, y, w)
+
             this.root = newNode
-            if (canvas.getContext) {
-                var ctx = canvas.getContext("2d");
-                var w = 36;
-                var x = Math.floor((window.innerWidth * .9) / 2)
-                var y = 50
-                ctx.beginPath();
-                ctx.arc(x, y, w/2, 0, 2 * Math.PI, false);
-                ctx.stroke()
-    
-                ctx = canvas.getContext("2d");
-                ctx.font = '10pt Georgia';
-                ctx.fillStyle = 'black';
-                ctx.textAlign = 'center';
-                ctx.fillText(value, x, y+3);
-            }
             return this
         }
 
-        // return this.checkValue
+        this.checkValue(this.root, newNode)
     }
 
     checkValue(current, newNode){
@@ -72,6 +66,30 @@ class BinaryTree {
         }
         else{
             return false
+        }
+    }
+}
+
+const drawNode = (value, xPos, yPos, w, startAngle = 1.9 * Math.PI) => {
+    const canvas = document.getElementById("tree-canvas")
+    if(canvas.getContext){
+        let ctx = canvas.getContext("2d");
+        if(startAngle > 0){
+            ctx.beginPath();
+            ctx.arc(xPos, yPos, w, startAngle, 2 * Math.PI, false);
+            ctx.strokeStyle = "#00FF00";
+            ctx.stroke()
+            setTimeout(() => drawNode(value, xPos, yPos, w, startAngle - .1), 20)
+        }
+        else {
+            ctx.beginPath();
+            ctx.arc(xPos, yPos, w, 0, 2 * Math.PI, false);
+            ctx.strokeStyle = "#000000";
+            ctx.stroke()
+            ctx.font = '10pt Georgia';
+            ctx.fillStyle = 'black';
+            ctx.textAlign = 'center';
+            ctx.fillText(value, xPos, yPos + 3);
         }
     }
 }

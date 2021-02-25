@@ -12,7 +12,9 @@ export class TreeNode {
         this.value = value;
         this.left = null;
         this.right = null;
-        this.frequency = 0
+        this.frequency = 0;
+        this.x = 0;
+        this.y = 0;
     }
 }
 
