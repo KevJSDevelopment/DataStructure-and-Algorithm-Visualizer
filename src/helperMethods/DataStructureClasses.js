@@ -98,7 +98,7 @@ export class BinaryTree {
             this.root = newNode
             return this
         }
-
+        
         let current = this.root
         while(current !== null){
             if(current.value > newNode.value){
