@@ -29,19 +29,38 @@ class BinaryTree {
     }
 
     checkValue(current, newNode){
-        if(current.value > newNode.value){
+        if(parseInt(current.value) > parseInt(newNode.value)){
             if(current.left === null){
+                const x = current.x < Math.floor((window.innerWidth * .9) / 2) ? current.x - (current.x / 4) : current.x - 45
+                const y = current.y + 45
+                const w = 18
+                
+                //assign the node position points so they can be referenced later
+                newNode.x = x
+                newNode.y = y
+
+                drawNode(parseInt(newNode.value), x, y, w)
                 current.left = newNode
                 return this
             }
             current = current.left
             setTimeout(() => this.checkValue(current, newNode), 250)
         }
-        else if(current.value < newNode.value){
+        else if(parseInt(current.value) < parseInt(newNode.value)){
             if(current.right === null){
+                const x = current.x > Math.floor((window.innerWidth * .9) / 2) ? current.x + (((window.innerWidth * .9) - current.x) / 4) : current.x + 45
+                const y = current.y + 45
+                const w = 18
+                
+                //assign the node position points so they can be referenced later
+                newNode.x = x
+                newNode.y = y
+
+                drawNode(parseInt(newNode.value), x, y, w)
                 current.right = newNode
                 return this
             }
+
             current = current.right
             setTimeout(() => this.checkValue(current, newNode), 250)
         } else {
@@ -77,14 +96,12 @@ const drawNode = (value, xPos, yPos, w, startAngle = 1.9 * Math.PI) => {
         if(startAngle > 0){
             ctx.beginPath();
             ctx.arc(xPos, yPos, w, startAngle, 2 * Math.PI, false);
-            ctx.strokeStyle = "#00FF00";
             ctx.stroke()
             setTimeout(() => drawNode(value, xPos, yPos, w, startAngle - .1), 20)
         }
         else {
             ctx.beginPath();
             ctx.arc(xPos, yPos, w, 0, 2 * Math.PI, false);
-            ctx.strokeStyle = "#000000";
             ctx.stroke()
             ctx.font = '10pt Georgia';
             ctx.fillStyle = 'black';
@@ -97,6 +114,15 @@ const drawNode = (value, xPos, yPos, w, startAngle = 1.9 * Math.PI) => {
 const BinarySearchTree = () => {
 
     const [tree, setTree] = useState(new BinaryTree())
+
+
+    const randomBinaryTree = () => {
+        let i = 0
+        while(i < 100){
+            tree.insert(Math.floor((Math.random() * 100)))
+            i++
+        }
+    }
 
     return (
         <div id="binary-tree-page" className="h-screen w-screen">
@@ -124,6 +150,12 @@ const BinarySearchTree = () => {
                         Find
                     </button>
                 </form>
+                <button className="m-6" onClick={randomBinaryTree} >
+                    Random Tree
+                </button>
+                <button className="m-6" onClick={randomBinaryTree} >
+                    Reset
+                </button>
             </div>
         </div>
     )
