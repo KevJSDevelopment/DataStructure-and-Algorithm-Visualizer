@@ -10,21 +10,28 @@ class BinaryTree {
         const newNode = new TreeNode(value)
 
         //Used to render node onto page in correct position
-        const container = document.getElementById("tree-container")
-        const div = document.createElement("div")
-        div.nodeValue = newNode.value
-
+        const canvas = document.getElementById("tree-canvas")
         if(!this.root) {
             this.root = newNode
-            div.style.border = "2px solid black"
-            div.style.borderRadius = "50%"
-            div.style.left = "50%"
-            div.style.webkitTransform = "translate(-50%, 0)"
-            div.style.position = "absolute"
-            div.innerHTML = value
-            container.append(div)
+            if (canvas.getContext) {
+                var ctx = canvas.getContext("2d");
+                var w = 36;
+                var x = Math.floor((window.innerWidth * .9) / 2)
+                var y = 50
+                ctx.beginPath();
+                ctx.arc(x, y, w/2, 0, 2 * Math.PI, false);
+                ctx.stroke()
+    
+                ctx = canvas.getContext("2d");
+                ctx.font = '10pt Georgia';
+                ctx.fillStyle = 'black';
+                ctx.textAlign = 'center';
+                ctx.fillText(value, x, y+3);
+            }
             return this
         }
+
+        // return this.checkValue
     }
 
     checkValue(current, newNode){
@@ -34,7 +41,7 @@ class BinaryTree {
                 return this
             }
             current = current.left
-            setTimeout(() => this.checkValue(current, newNode), 1000)
+            setTimeout(() => this.checkValue(current, newNode), 250)
         }
         else if(current.value < newNode.value){
             if(current.right === null){
@@ -42,7 +49,7 @@ class BinaryTree {
                 return this
             }
             current = current.right
-            setTimeout(() => this.checkValue(current, newNode), 1000)
+            setTimeout(() => this.checkValue(current, newNode), 250)
         } else {
             current.frequency += 1
             return this
@@ -75,9 +82,9 @@ const BinarySearchTree = () => {
 
     return (
         <div id="binary-tree-page" className="h-screen w-screen">
-            <div id="tree-container" className="h-5/6 w-full">
-
-            </div>
+            <canvas id="tree-canvas" className="mt-2 ml-2 border-gray-200 border-2" width={window.innerWidth * .9} height={window.innerHeight * .9} >
+                
+            </canvas>
             <div className="flex flex-row">
                 <form 
                 onSubmit={(event) => {
