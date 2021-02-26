@@ -15,6 +15,7 @@ export class TreeNode {
         this.frequency = 0;
         this.x = 0;
         this.y = 0;
+        this.nodeNumberOnBranch = 0;
     }
 }
 

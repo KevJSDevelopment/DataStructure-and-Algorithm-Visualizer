@@ -1,97 +1,31 @@
 export const getXPos = (prevNode, root, left = true) => {
+    
+    const lowerQuartile = Math.floor(window.innerWidth * .9) * .25
+    const upperQuartile = Math.floor(window.innerWidth * .9) * .75
 
-    
-    const start = 0
-    const end = Math.floor(window.innerWidth * .9)
-    const midPoint = Math.floor(end / 2)
-    const firstQuadrant = Math.floor((midPoint - (midPoint * .5)))
-    const thirdQuadrant = Math.floor((midPoint + (midPoint * .5)))
-    
     if(prevNode === root){
         let xPos
-        left ? xPos = firstQuadrant : xPos = thirdQuadrant
+        left ? xPos = lowerQuartile: xPos = upperQuartile
         return xPos
     }
 
     let xPos
+    const distanceFromPrevNode = (80 - Math.floor((parseInt(prevNode.nodeNumberOnBranch) * 8)))
+
     if(left){
-
-        const defaultPos = prevNode.x - 25
-
-        if(prevNode.x > midPoint){
-            if(prevNode.x > thirdQuadrant) {
-                if(prevNode.x - (Math.floor(((prevNode.x - thirdQuadrant) / 4))) < defaultPos){
-                    xPos = prevNode.x - (Math.floor(((prevNode.x - thirdQuadrant) / 4)))
-                } else {
-                    xPos = defaultPos
-                }
-            }
-            else {
-                if(prevNode.x - (Math.floor(((prevNode.x - midPoint) / 4))) < defaultPos){
-                    xPos = prevNode.x - (Math.floor(((prevNode.x - midPoint) / 4)))
-                } else {
-                    xPos = defaultPos
-                }
-            }
-        } else {
-            if(prevNode.x >= firstQuadrant) {
-                if(prevNode.x - (Math.floor(((midPoint - prevNode.x) / 4))) < defaultPos){
-                    xPos = prevNode.x - (Math.floor(((midPoint - prevNode.x) / 4)))
-                }
-                else {
-                    xPos = defaultPos
-                }
-            }
-            else {
-                if(prevNode.x - (Math.floor((prevNode.x / 4))) < defaultPos){
-
-                    xPos = prevNode.x - (Math.floor((prevNode.x / 4)))
-                }
-                else {
-                    xPos = defaultPos
-                }
-            }
+        if(distanceFromPrevNode > 0){
+            xPos = prevNode.x - distanceFromPrevNode
+        }
+        else {
+            xPos = prevNode.x - 18
         }
     }
     else {
-
-        const defaultPos = prevNode.x + 25
-
-        if(prevNode.x > midPoint){
-            if(prevNode.x >= thirdQuadrant) {
-                if(prevNode.x + (Math.floor(((end - prevNode.x) / 4))) < defaultPos){
-                    xPos = prevNode.x + (Math.floor(((end - prevNode.x) / 4)))
-                }
-                else {
-                    xPos = defaultPos
-                }
-            }
-            else {
-                if(prevNode.x + (Math.floor(((thirdQuadrant - prevNode.x) / 4))) < defaultPos){
-                    xPos = prevNode.x + (Math.floor(((thirdQuadrant - prevNode.x) / 4)))
-                }
-                else {
-                    xPos = defaultPos
-                }
-            }
-        } else {
-            if(prevNode.x >= firstQuadrant) {
-                if(prevNode.x + (Math.floor(((midPoint - prevNode.x) / 4))) < defaultPos){
-                    xPos = prevNode.x + (Math.floor(((midPoint - prevNode.x) / 4)))
-                }
-                else {
-                    xPos = defaultPos
-                }
-                
-            }
-            else {
-                if(prevNode.x + (Math.floor(((firstQuadrant - prevNode.x) / 4))) < defaultPos){
-                    xPos = prevNode.x + (Math.floor(((firstQuadrant - prevNode.x) / 4)))
-                }
-                else {
-                    xPos = defaultPos
-                }
-            }
+        if(distanceFromPrevNode > 0){
+            xPos = prevNode.x + distanceFromPrevNode
+        }
+        else {
+            xPos = prevNode.x + 18
         }
     }
 
@@ -134,5 +68,15 @@ export const drawConnection = (x1, y1, x2, y2, color = "#000000") => {
         ctx.lineTo(x2, y2);
         ctx.strokeStyle = color
         ctx.stroke(); 
+    }
+}
+
+export const resetCanvas = () => {
+    const canvas = document.getElementById("tree-canvas")
+    if(canvas.getContext){
+        var ctx = canvas.getContext("2d");
+        ctx.beginPath();
+        ctx.clearRect(0, 0, window.innerWidth * .9, window.innerHeight * .9);
+        ctx.closePath();
     }
 }

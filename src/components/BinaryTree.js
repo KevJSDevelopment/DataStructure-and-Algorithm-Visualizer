@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { TreeNode } from '../helperMethods/DataStructureClasses'
-import { drawNode, getXPos, drawConnection } from '../helperMethods/BinarySearchHelpers';
+import { drawNode, getXPos, drawConnection, resetCanvas } from '../helperMethods/BinarySearchHelpers';
 
 class BinaryTree {
     constructor() {
@@ -46,6 +46,7 @@ class BinaryTree {
                 return this
             }
             prevNode = prevNode.left
+            newNode.nodeNumberOnBranch += 1
             setTimeout(() => this.checkValue(prevNode, newNode), 250)
         }
 
@@ -58,6 +59,7 @@ class BinaryTree {
                 //assign the node position points so they can be referenced later
                 newNode.x = xPos
                 newNode.y = yPos
+                newNode.nodeNumberOnBranch += 1
 
                 drawNode(parseInt(newNode.value), xPos, yPos, radius)
                 setTimeout(() => drawConnection(prevNode.x, prevNode.y, xPos, yPos), 1750)
@@ -66,6 +68,7 @@ class BinaryTree {
             }
 
             prevNode = prevNode.right
+            newNode.nodeNumberOnBranch += 1
             setTimeout(() => this.checkValue(prevNode, newNode), 250)
         } 
         
@@ -83,6 +86,7 @@ class BinaryTree {
 
         if(parseInt(value) === parseInt(node.value)){
             drawNode(parseInt(node.value), node.x, node.y, 18, "#00FF00")
+            console.log(node.nodeNumberOnBranch)
             return node
         }
         else if(parseInt(value) < parseInt(node.value)){
@@ -118,6 +122,11 @@ const BinarySearchTree = () => {
         }
     }
 
+    const resetTree = () => {
+        setTree(new BinaryTree())
+        resetCanvas()
+    }
+
     return (
         <div id="binary-tree-page" className="h-screen w-screen">
             <canvas id="tree-canvas" className="mt-2 ml-2 border-gray-200 border-2" width={window.innerWidth * .9} height={window.innerHeight * .9} >
@@ -147,7 +156,7 @@ const BinarySearchTree = () => {
                 <button className="m-6" onClick={randomBinaryTree} >
                     Random Tree
                 </button>
-                <button className="m-6" onClick={randomBinaryTree} >
+                <button className="m-6" onClick={resetTree} >
                     Reset
                 </button>
             </div>
