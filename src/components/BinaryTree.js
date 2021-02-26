@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { TreeNode } from '../helperMethods/DataStructureClasses'
+import { drawNode, getXPos, drawConnection } from '../helperMethods/BinarySearchHelpers';
 
 class BinaryTree {
     constructor() {
@@ -40,7 +41,7 @@ class BinaryTree {
                 newNode.y = yPos
 
                 drawNode(parseInt(newNode.value), xPos, yPos, radius)
-                setTimeout(() => drawConnection(prevNode.x, prevNode.y, xPos, yPos), 1000)
+                setTimeout(() => drawConnection(prevNode.x, prevNode.y, xPos, yPos), 1750)
                 prevNode.left = newNode
                 return this
             }
@@ -59,7 +60,7 @@ class BinaryTree {
                 newNode.y = yPos
 
                 drawNode(parseInt(newNode.value), xPos, yPos, radius)
-                setTimeout(() => drawConnection(prevNode.x, prevNode.y, xPos, yPos), 1000)
+                setTimeout(() => drawConnection(prevNode.x, prevNode.y, xPos, yPos), 1750)
                 prevNode.right = newNode
                 return this
             }
@@ -76,120 +77,31 @@ class BinaryTree {
 
     find(value, node = this.root){
         if(!node){
+            alert(`No node with value ${value} was found`)
             return false
         }
 
-        if(value === node.value){
+        if(parseInt(value) === parseInt(node.value)){
+            drawNode(parseInt(node.value), node.x, node.y, 18, "#00FF00")
             return node
         }
-        else if(value < node.value){
-            this.find(value, node.left)
+        else if(parseInt(value) < parseInt(node.value)){
+            drawNode(parseInt(node.value), node.x, node.y, 18, "#ffa500")
+            if(node.left !== null){
+                setTimeout(() => drawConnection(node.x, node.y, node.left.x, node.left.y, "#ffa500"), 1750)
+            }
+            setTimeout(() => this.find(value, node.left), 2000)
         }
-        else if(value > node.value){
-            this.find(value, node.right)
+        else if(parseInt(value) > parseInt(node.value)){
+            drawNode(parseInt(node.value), node.x, node.y, 18, "#ffa500")
+            if(node.right !== null){
+                setTimeout(() => drawConnection(node.x, node.y, node.right.x, node.right.y, "#ffa500"), 1750)
+            }
+            setTimeout(() => this.find(value, node.right), 2000)
         }
         else{
             return false
         }
-    }
-}
-
-const getXPos = (prevNode, root, left = true) => {
-
-    
-    const start = 0
-    const end = Math.floor(window.innerWidth * .9)
-    const midPoint = Math.floor(end / 2)
-    const firstQuadrant = Math.floor((midPoint - (midPoint * .5)))
-    const thirdQuadrant = Math.floor((midPoint + (midPoint * .5)))
-    
-    if(prevNode === root){
-        let xPos
-        left ? xPos = firstQuadrant : xPos = thirdQuadrant
-        return xPos
-    }
-
-    let xPos
-    if(left){
-        if(prevNode.x > midPoint){
-            if(prevNode.x > thirdQuadrant) {
-                xPos = prevNode.x - (Math.floor(((prevNode.x - thirdQuadrant) / 4)))
-            }
-            else {
-                xPos = prevNode.x - (Math.floor(((prevNode.x - midPoint) / 4)))
-            }
-        } else {
-            if(prevNode.x >= firstQuadrant) {
-                xPos = prevNode.x - (Math.floor(((midPoint - prevNode.x) / 4)))
-            }
-            else {
-                xPos = prevNode.x - (Math.floor((prevNode.x / 4)))
-            }
-        }
-    }
-    else {
-        if(prevNode.x > midPoint){
-            if(prevNode.x >= thirdQuadrant) {
-                xPos = prevNode.x + (Math.floor(((end - prevNode.x) / 4)))
-            }
-            else {
-                xPos = prevNode.x + (Math.floor(((thirdQuadrant - prevNode.x) / 4)))
-            }
-        } else {
-            if(prevNode.x >= firstQuadrant) {
-                xPos = prevNode.x + (Math.floor(((midPoint - prevNode.x) / 4)))
-            }
-            else {
-                xPos = prevNode.x + (Math.floor(((firstQuadrant - prevNode.x) / 4)))
-            }
-        }
-    }
-
-    return xPos
-}
-
-const drawNode = (value, xPos, yPos, w, startAngle = 1.9 * Math.PI) => {
-    const canvas = document.getElementById("tree-canvas")
-    if(canvas.getContext){
-        let ctx = canvas.getContext("2d");
-        if(startAngle > 0){
-            ctx.beginPath();
-            ctx.arc(xPos, yPos, w, startAngle, 2 * Math.PI, false);
-            ctx.stroke()
-            setTimeout(() => drawNode(value, xPos, yPos, w, startAngle - .1), 20)
-        }
-        else {
-            ctx.beginPath();
-            ctx.arc(xPos, yPos, w, 0, 2 * Math.PI, false);
-            ctx.stroke()
-            ctx.font = '10pt Georgia';
-            ctx.fillStyle = 'black';
-            ctx.textAlign = 'center';
-            ctx.fillText(value, xPos, yPos + 3);
-        }
-    }
-}
-
-const drawConnection = (x1, y1, x2, y2) => {
-
-    const canvas = document.getElementById("tree-canvas")
-    if(canvas.getContext){
-        var ctx = canvas.getContext("2d");
-        ctx.beginPath();
-        ctx.moveTo(x1, y1);
-        ctx.lineTo(x2, y2);
-        ctx.stroke(); 
-        // if(x1 < x2){
-        //     ctx.moveTo(x1, y1);
-        //     ctx.lineTo(x1 + 2, y1 + 2);
-        //     ctx.stroke();
-        //     setTimeout(() => drawConnection(x1 + 2, y1 + 2, x2, y2), 20)
-        // }
-        // else {
-        //     ctx.moveTo(x1, y1);
-        //     ctx.lineTo(x2, y2);
-        //     ctx.stroke(); 
-        // }
     }
 }
 
