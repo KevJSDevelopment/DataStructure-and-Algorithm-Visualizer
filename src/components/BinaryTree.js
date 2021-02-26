@@ -12,7 +12,7 @@ class BinaryTree {
         if(!this.root) {
             //location on canvas for root node
             const x = Math.floor((window.innerWidth * .9) / 2)
-            const y = 50
+            const y = 25
             const w = 18
 
             //assign the node position points so they can be referenced later
@@ -31,8 +31,10 @@ class BinaryTree {
     checkValue(current, newNode){
         if(parseInt(current.value) > parseInt(newNode.value)){
             if(current.left === null){
-                const x = current.x < Math.floor((window.innerWidth * .9) / 2) ? current.x - (current.x / 4) : current.x - 45
-                const y = current.y + 45
+                let x
+                if(current === this.root) x = current.x - 250
+                else x = current.x - 45
+                const y = current.y + (Math.floor((window.innerHeight * .9 - current.y))) / 7
                 const w = 18
                 
                 //assign the node position points so they can be referenced later
@@ -40,6 +42,7 @@ class BinaryTree {
                 newNode.y = y
 
                 drawNode(parseInt(newNode.value), x, y, w)
+                setTimeout(() => drawConnection(current.x, current.y, x, y), 1000)
                 current.left = newNode
                 return this
             }
@@ -48,8 +51,10 @@ class BinaryTree {
         }
         else if(parseInt(current.value) < parseInt(newNode.value)){
             if(current.right === null){
-                const x = current.x > Math.floor((window.innerWidth * .9) / 2) ? current.x + (((window.innerWidth * .9) - current.x) / 4) : current.x + 45
-                const y = current.y + 45
+                let x
+                if(current === this.root) x = current.x + 250
+                else x = current.x + 45
+                const y = current.y + (Math.floor((window.innerHeight * .9 - current.y))) / 7
                 const w = 18
                 
                 //assign the node position points so they can be referenced later
@@ -57,6 +62,7 @@ class BinaryTree {
                 newNode.y = y
 
                 drawNode(parseInt(newNode.value), x, y, w)
+                setTimeout(() => drawConnection(current.x, current.y, x, y), 1000)
                 current.right = newNode
                 return this
             }
@@ -108,6 +114,29 @@ const drawNode = (value, xPos, yPos, w, startAngle = 1.9 * Math.PI) => {
             ctx.textAlign = 'center';
             ctx.fillText(value, xPos, yPos + 3);
         }
+    }
+}
+
+const drawConnection = (x1, y1, x2, y2) => {
+
+    const canvas = document.getElementById("tree-canvas")
+    if(canvas.getContext){
+        var ctx = canvas.getContext("2d");
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.stroke(); 
+        // if(x1 < x2){
+        //     ctx.moveTo(x1, y1);
+        //     ctx.lineTo(x1 + 2, y1 + 2);
+        //     ctx.stroke();
+        //     setTimeout(() => drawConnection(x1 + 2, y1 + 2, x2, y2), 20)
+        // }
+        // else {
+        //     ctx.moveTo(x1, y1);
+        //     ctx.lineTo(x2, y2);
+        //     ctx.stroke(); 
+        // }
     }
 }
 
