@@ -8,18 +8,18 @@ class BinaryTree {
 
     insert(value) {
         const newNode = new TreeNode(value)
-
+        const midPoint = Math.floor((window.innerWidth * .9) / 2)
         if(!this.root) {
             //location on canvas for root node
-            const x = Math.floor((window.innerWidth * .9) / 2)
-            const y = 25
-            const w = 18
+            const xPos = midPoint
+            const yPos = 25
+            const radius = 18
 
             //assign the node position points so they can be referenced later
-            newNode.x = x
-            newNode.y = y
+            newNode.x = xPos
+            newNode.y = yPos
 
-            drawNode(value, x, y, w)
+            drawNode(value, xPos, yPos, radius)
 
             this.root = newNode
             return this
@@ -28,49 +28,48 @@ class BinaryTree {
         this.checkValue(this.root, newNode)
     }
 
-    checkValue(current, newNode){
-        if(parseInt(current.value) > parseInt(newNode.value)){
-            if(current.left === null){
-                let x
-                if(current === this.root) x = current.x - 250
-                else x = current.x - 45
-                const y = current.y + (Math.floor((window.innerHeight * .9 - current.y))) / 7
-                const w = 18
+    checkValue(prevNode, newNode){
+        if(parseInt(prevNode.value) > parseInt(newNode.value)){
+            if(prevNode.left === null){
+                const xPos = getXPos(prevNode, this.root, true)
+                const yPos = prevNode.y + 50
+                const radius = 18
                 
                 //assign the node position points so they can be referenced later
-                newNode.x = x
-                newNode.y = y
+                newNode.x = xPos
+                newNode.y = yPos
 
-                drawNode(parseInt(newNode.value), x, y, w)
-                setTimeout(() => drawConnection(current.x, current.y, x, y), 1000)
-                current.left = newNode
+                drawNode(parseInt(newNode.value), xPos, yPos, radius)
+                setTimeout(() => drawConnection(prevNode.x, prevNode.y, xPos, yPos), 1000)
+                prevNode.left = newNode
                 return this
             }
-            current = current.left
-            setTimeout(() => this.checkValue(current, newNode), 250)
+            prevNode = prevNode.left
+            setTimeout(() => this.checkValue(prevNode, newNode), 250)
         }
-        else if(parseInt(current.value) < parseInt(newNode.value)){
-            if(current.right === null){
-                let x
-                if(current === this.root) x = current.x + 250
-                else x = current.x + 45
-                const y = current.y + (Math.floor((window.innerHeight * .9 - current.y))) / 7
-                const w = 18
+
+        else if(parseInt(prevNode.value) < parseInt(newNode.value)){
+            if(prevNode.right === null){
+                const xPos = getXPos(prevNode, this.root, false)
+                const yPos = prevNode.y + 50
+                const radius = 18
                 
                 //assign the node position points so they can be referenced later
-                newNode.x = x
-                newNode.y = y
+                newNode.x = xPos
+                newNode.y = yPos
 
-                drawNode(parseInt(newNode.value), x, y, w)
-                setTimeout(() => drawConnection(current.x, current.y, x, y), 1000)
-                current.right = newNode
+                drawNode(parseInt(newNode.value), xPos, yPos, radius)
+                setTimeout(() => drawConnection(prevNode.x, prevNode.y, xPos, yPos), 1000)
+                prevNode.right = newNode
                 return this
             }
 
-            current = current.right
-            setTimeout(() => this.checkValue(current, newNode), 250)
-        } else {
-            current.frequency += 1
+            prevNode = prevNode.right
+            setTimeout(() => this.checkValue(prevNode, newNode), 250)
+        } 
+        
+        else {
+            prevNode.frequency += 1
             return this
         }
     }
@@ -93,6 +92,60 @@ class BinaryTree {
             return false
         }
     }
+}
+
+const getXPos = (prevNode, root, left = true) => {
+
+    
+    const start = 0
+    const end = Math.floor(window.innerWidth * .9)
+    const midPoint = Math.floor(end / 2)
+    const firstQuadrant = Math.floor((midPoint - (midPoint * .5)))
+    const thirdQuadrant = Math.floor((midPoint + (midPoint * .5)))
+    
+    if(prevNode === root){
+        let xPos
+        left ? xPos = firstQuadrant : xPos = thirdQuadrant
+        return xPos
+    }
+
+    let xPos
+    if(left){
+        if(prevNode.x > midPoint){
+            if(prevNode.x > thirdQuadrant) {
+                xPos = prevNode.x - (Math.floor(((prevNode.x - thirdQuadrant) / 4)))
+            }
+            else {
+                xPos = prevNode.x - (Math.floor(((prevNode.x - midPoint) / 4)))
+            }
+        } else {
+            if(prevNode.x >= firstQuadrant) {
+                xPos = prevNode.x - (Math.floor(((midPoint - prevNode.x) / 4)))
+            }
+            else {
+                xPos = prevNode.x - (Math.floor((prevNode.x / 4)))
+            }
+        }
+    }
+    else {
+        if(prevNode.x > midPoint){
+            if(prevNode.x >= thirdQuadrant) {
+                xPos = prevNode.x + (Math.floor(((end - prevNode.x) / 4)))
+            }
+            else {
+                xPos = prevNode.x + (Math.floor(((thirdQuadrant - prevNode.x) / 4)))
+            }
+        } else {
+            if(prevNode.x >= firstQuadrant) {
+                xPos = prevNode.x + (Math.floor(((midPoint - prevNode.x) / 4)))
+            }
+            else {
+                xPos = prevNode.x + (Math.floor(((firstQuadrant - prevNode.x) / 4)))
+            }
+        }
+    }
+
+    return xPos
 }
 
 const drawNode = (value, xPos, yPos, w, startAngle = 1.9 * Math.PI) => {
