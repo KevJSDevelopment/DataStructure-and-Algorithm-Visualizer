@@ -13,14 +13,14 @@ const Algorithms = () => {
     return (
         <div className="w-screen">
             <Switch>
-                <Route path="/" exact render={() => <Home /> }/>
-                <Route path="/multiple-pointers" exact render={() => <MultiplePointers /> }/> 
-                <Route path="/merge-sort" exact render={() => <MergeSort /> }/> 
-                <Route path="/quick-sort" exact render={() => <QuickSort /> }/> 
-                <Route path="/bubble-sort" exact render={() => <BubbleSort /> }/> 
-                <Route path="/linked-list" exact render={() => <LinkedList /> }/>
-                <Route path="/binary-tree" component={BinarySearchTree}/>
-                <Redirect to="/"/>
+                <Route path="/DataStructure-and-Algorithm-Visualizer" exact render={() => <Home /> }/>
+                <Route path="/DataStructure-and-Algorithm-Visualizer/multiple-pointers" exact render={() => <MultiplePointers /> }/> 
+                <Route path="/DataStructure-and-Algorithm-Visualizer/merge-sort" exact render={() => <MergeSort /> }/> 
+                <Route path="/DataStructure-and-Algorithm-Visualizer/quick-sort" exact render={() => <QuickSort /> }/> 
+                <Route path="/DataStructure-and-Algorithm-Visualizer/bubble-sort" exact render={() => <BubbleSort /> }/> 
+                <Route path="/DataStructure-and-Algorithm-Visualizer/linked-list" exact render={() => <LinkedList /> }/>
+                <Route path="/DataStructure-and-Algorithm-Visualizer/binary-tree" component={BinarySearchTree}/>
+                <Redirect to="/DataStructure-and-Algorithm-Visualizer"/>
             </Switch>
         </div>
     )
