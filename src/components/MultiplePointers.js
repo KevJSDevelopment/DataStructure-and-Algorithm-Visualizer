@@ -54,6 +54,9 @@ const MultiplePointers = () => {
         } else{
             setTimeout(() => findSum(left, right - 1, total, target1, target2), 100)       
         }
+
+        alert(`No numbers in this array add up to ${total}`)
+        return false
     }
 
     useEffect(() => {
@@ -62,14 +65,18 @@ const MultiplePointers = () => {
 
     return (
         <div>
+            <div>Utilize multiple pointers to find if the sum of any two numbers add up to a given total</div>
             <div className={`flex items-center h-64 grid grid-cols-${rows} grid-flow-row gap-8`}>
                 {testArray.map((value, index) => {
                     return <ArrayCircle value={value} index={index} />
                 })}
             </div>
-            <button className="hover:bg-gray-200 rounded-xl p-1 float-right" onClick={() => findSum()}>
-                Run
-            </button>
+            <form>
+                <input type="number"></input>
+                <button className="hover:bg-gray-200 rounded-xl p-1 float-right" onClick={() => findSum()}>
+                    Run Multiple Pointers
+                </button>
+            </form>
         </div>
     )
 }

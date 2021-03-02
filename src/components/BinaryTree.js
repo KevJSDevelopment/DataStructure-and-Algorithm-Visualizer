@@ -116,7 +116,7 @@ const BinarySearchTree = () => {
 
     const randomBinaryTree = () => {
         let i = 0
-        while(i < 100){
+        while(i < 20){
             tree.insert(Math.floor((Math.random() * 100)))
             i++
         }
