@@ -7,6 +7,7 @@ import QuickSort from '../components/QuickSort';
 import BubbleSort from '../components/BubbleSort';
 import LinkedList from '../components/SingleLinkedList';
 import BinarySearchTree from '../components/BinaryTree';
+import BinaryHeap from '../components/BinaryHeap';
 
 const Algorithms = () => {
     
@@ -20,7 +21,8 @@ const Algorithms = () => {
                 <Route path="/DataStructure-and-Algorithm-Visualizer/quick-sort" exact render={() => <QuickSort /> }/> 
                 <Route path="/DataStructure-and-Algorithm-Visualizer/bubble-sort" exact render={() => <BubbleSort /> }/> 
                 <Route path="/DataStructure-and-Algorithm-Visualizer/linked-list" exact render={() => <LinkedList /> }/>
-                <Route path="/DataStructure-and-Algorithm-Visualizer/binary-tree" component={BinarySearchTree}/>
+                <Route path="/DataStructure-and-Algorithm-Visualizer/binary-tree" exact render={() => <BinarySearchTree/>}/>
+                <Route path="/DataStructure-and-Algorithm-Visualizer/binary-heap" exact render={() => <BinaryHeap/>}/>
                 <Redirect to="/DataStructure-and-Algorithm-Visualizer"/>
             </Switch>
         </div>
