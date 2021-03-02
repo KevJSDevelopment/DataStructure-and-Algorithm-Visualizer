@@ -13,6 +13,7 @@ const Algorithms = () => {
     return (
         <div className="w-screen">
             <Switch>
+                <Route path="/" exact render={() => <Home />}/>
                 <Route path="/DataStructure-and-Algorithm-Visualizer" exact render={() => <Home /> }/>
                 <Route path="/DataStructure-and-Algorithm-Visualizer/multiple-pointers" exact render={() => <MultiplePointers /> }/> 
                 <Route path="/DataStructure-and-Algorithm-Visualizer/merge-sort" exact render={() => <MergeSort /> }/> 

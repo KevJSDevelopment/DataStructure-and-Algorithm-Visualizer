@@ -10,13 +10,13 @@ const Navbar = () => {
                     Sorting Algorithms
                 </div>
                 <button className="bg-white w-full mb-2 rounded-md hover:bg-gray-100">
-                    <Link to="/merge-sort">Merge Sort</Link>
+                    <Link to="/DataStructure-and-Algorithm-Visualizer/merge-sort">Merge Sort</Link>
                 </button>
                 <button className="bg-white w-full mb-2 rounded-md hover:bg-gray-100">
-                    <Link to="/quick-sort">Quick Sort</Link>
+                    <Link to="/DataStructure-and-Algorithm-Visualizer/quick-sort">Quick Sort</Link>
                 </button>
                 <button className="bg-white w-full mb-2 rounded-md hover:bg-gray-100">
-                    <Link to="/bubble-sort">Bubble Sort</Link>
+                    <Link to="/DataStructure-and-Algorithm-Visualizer/bubble-sort">Bubble Sort</Link>
                 </button>
             </div>
             <div id="data-structures-container" className="mb-12">
@@ -24,10 +24,10 @@ const Navbar = () => {
                     Data Structures     
                 </div>
                 <button className="bg-white w-full mb-2 rounded-md hover:bg-gray-100">
-                    <Link to="/linked-list">Singly Linked List</Link>
+                    <Link to="/DataStructure-and-Algorithm-Visualizer/linked-list">Singly Linked List</Link>
                 </button>
                 <button className="bg-white w-full mb-2 rounded-md hover:bg-gray-100">
-                    <Link to="/binary-tree">Binary Tree</Link>
+                    <Link to="/DataStructure-and-Algorithm-Visualizer/binary-tree">Binary Tree</Link>
                 </button>
             </div>
             <div id="path-finding-container" className="mb-12">
@@ -36,7 +36,7 @@ const Navbar = () => {
                 </div>
             </div>
             <button className="bg-white w-full rounded-md hover:bg-gray-100">
-                <Link to="/multiple-pointers">Multiple pointers</Link>
+                <Link to="/DataStructure-and-Algorithm-Visualizer/multiple-pointers">Multiple pointers</Link>
             </button>
         </div>
     )
