@@ -46,12 +46,14 @@ const BubbleSort = () => {
     }, [])
 
     return (
-        <div className="flex flex-row">
-            {values.map((value, index) => {
-                return <ArrayBar key={index} value={value} index={index} />
-            })}
-            <button onClick={() => bubbleSort()}>
-                Run
+        <div>
+            <div className="flex flex-row">
+                {values.map((value, index) => {
+                    return <ArrayBar key={index} value={value} index={index} />
+                })}
+            </div>
+            <button className="m-6 bg-gray-300 rounded hover:bg-gray-100 pl-2 pr-2" onClick={() => bubbleSort()}>
+                Run Bubble Sort
             </button>
         </div>
     )

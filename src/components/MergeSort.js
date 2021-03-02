@@ -47,14 +47,16 @@ const MergeSort = () => {
     }, [])
 
     return (
+      <div>
         <div className="flex flex-row">
             {testArray.map((value, index) => {
                 return <ArrayBar value={value} index={index} key={index}/>
             })}
-            <button onClick={() => mergeSort()}>
-                Run
-            </button>
         </div>
+        <button className="m-6 bg-gray-300 rounded hover:bg-gray-100 pl-2 pr-2" onClick={() => mergeSort()}>
+            Run Merge Sort
+        </button>
+      </div>
     )
 }
 

@@ -70,12 +70,14 @@ const QuickSort = () => {
     }, [])
 
     return (
-        <div className="flex flex-row">
-            {values.map((value, index) => {
-                return <ArrayBar value={value} index={index} key={index}/>
-            })}
-            <button onClick={() => quickSort(values, 0, values.length - 1)}>
-                Run
+        <div>
+            <div className="flex flex-row">
+                {values.map((value, index) => {
+                    return <ArrayBar value={value} index={index} key={index}/>
+                })}
+            </div>
+            <button className="m-6 bg-gray-300 rounded hover:bg-gray-100 pl-2 pr-2"  onClick={() => quickSort(values, 0, values.length - 1)}>
+                Run Quick Sort
             </button>
         </div>
     )
