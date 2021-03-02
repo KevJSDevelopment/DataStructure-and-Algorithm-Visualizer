@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import ArrayBar from './ArrayBar'
 import { resetArray } from '../helperMethods/HelperMethods'
 
 const BubbleSort = () => {
 
-    const [values, setValues] = useState([])
+    const [values, setValues] = useState(resetArray())
 
     const bubbleSort = async () => {
         
@@ -41,10 +41,6 @@ const BubbleSort = () => {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-    useEffect(() => {
-        setValues(resetArray())
-    }, [])
-
     return (
         <div>
             <div className="flex flex-row">
@@ -54,6 +50,9 @@ const BubbleSort = () => {
             </div>
             <button className="m-6 bg-gray-300 rounded hover:bg-gray-100 pl-2 pr-2" onClick={() => bubbleSort()}>
                 Run Bubble Sort
+            </button>
+            <button className="m-6 bg-gray-300 rounded hover:bg-gray-100 pl-2 pr-2" onClick={() => setValues(resetArray())}>
+                Reset
             </button>
         </div>
     )

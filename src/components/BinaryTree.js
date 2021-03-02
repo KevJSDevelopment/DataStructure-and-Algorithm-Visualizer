@@ -121,7 +121,7 @@ const BinarySearchTree = () => {
             i++
         }
     }
-
+    
     const resetTree = () => {
         setTree(new BinaryTree())
         resetCanvas()

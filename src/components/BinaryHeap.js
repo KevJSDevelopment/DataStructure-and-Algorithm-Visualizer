@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { HeapNode } from '../helperMethods/DataStructureClasses';
+import React from 'react'
+// import { HeapNode } from '../helperMethods/DataStructureClasses';
 
 class MaxBinaryHeap {
     constructor() {
@@ -7,9 +7,54 @@ class MaxBinaryHeap {
     }
 
     insert(value) {
-        console.log(value)
         this.values.push(value)
-        this.bubbleUp(value)
+        this.bubbleUp()
+    }
+
+    extractMax() {
+       const max = this.values[0]
+       const end = this.values.pop()
+       if(this.values.length > 0){
+           this.values[0] = end
+           this.bubbleDown()
+       }
+       return max
+    }
+
+    bubbleDown() {
+
+        let index = 0
+        const length = this.values.length
+        const element = this.values[index]
+
+        while(index < this.values.length - 1){
+            let child1Idx = (2*index) + 1
+            let child2Idx = (2*index) + 2
+            let child1, child2
+            let swap = null
+
+            if(child1Idx < length){
+                child1 = this.values[child1Idx]
+                if(child1 > element){
+                    swap = child1Idx
+                }
+            }
+
+            if(child2Idx < length){
+                child2 = this.values[child2Idx]
+                if(!swap && child2 > element){
+                    swap = child2Idx
+                }
+                if(swap && child2 > child1){
+                    swap = child2Idx
+                }
+            }
+
+            if(!swap) break
+            this.values[index] = this.values[swap]
+            this.values[swap] = element
+            index = swap
+        }
     }
 
     bubbleUp(){
@@ -31,11 +76,15 @@ class MaxBinaryHeap {
 
 const BinaryHeap = () => {
 
-    const [heap, setHeap] = useState(new MaxBinaryHeap())
+    const heap = new MaxBinaryHeap()
 
     return (
         <div>
-            <button onClick={() => heap.insert(Math.floor((Math.random() * 25)))}>insert rand num</button>
+            <button className="border-2 rounded bg-gray-300 m-12 hover:bg-gray-100 border-gray-500" onClick={() => heap.insert(Math.floor((Math.random() * 25)))}>Insert Number</button>
+            <button className="border-2 rounded bg-gray-300 m-12 hover:bg-gray-100 border-gray-500" onClick={() => {
+                console.log(heap.values)
+                console.log(heap.extractMax())
+                }}>Extract</button>
         </div>
     )
 }

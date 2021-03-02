@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react'
 import ArrayCircle from './ArrayCircle'
-import Navbar from '../containers/Navbar'
 
 const MultiplePointers = () => {
 
