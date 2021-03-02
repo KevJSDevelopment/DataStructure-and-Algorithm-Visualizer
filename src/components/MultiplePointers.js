@@ -21,8 +21,8 @@ const MultiplePointers = () => {
         return Math.floor(Math.random() * (max - min + 1) + min)
     }
 
-    const findSum = (left = 0, right = testArray.length - 1, total = 100, oldTarget1 = null, oldTarget2 = null) => {
-        
+    const findSum = (total = 100, left = 0, right = testArray.length - 1, oldTarget1 = null, oldTarget2 = null) => {
+
         if(left >= testArray.length - 1){
             return false
         }
@@ -42,7 +42,7 @@ const MultiplePointers = () => {
         target1.style.backgroundColor = "whitesmoke"
         target2.style.backgroundColor = "whitesmoke"
 
-        if(sum === total) {
+        if(sum === parseInt(total)) {
             const answer1 = document.getElementById(`circle-${left}`)
             const answer2 = document.getElementById(`circle-${right}`)
 
@@ -50,13 +50,10 @@ const MultiplePointers = () => {
             answer2.style.backgroundColor = "green"
             return true
         } else if(right <= left + 1){
-            setTimeout(() => findSum(left + 1, testArray.length - 1, total, target1, target2), 100)
+            setTimeout(() => findSum(total, left + 1, testArray.length - 1, target1, target2), 100)
         } else{
-            setTimeout(() => findSum(left, right - 1, total, target1, target2), 100)       
+            setTimeout(() => findSum(total, left, right - 1, target1, target2), 100)       
         }
-
-        alert(`No numbers in this array add up to ${total}`)
-        return false
     }
 
     useEffect(() => {
@@ -65,18 +62,26 @@ const MultiplePointers = () => {
 
     return (
         <div>
-            <div>Utilize multiple pointers to find if the sum of any two numbers add up to a given total</div>
+            <div className="w-full mt-6 mb-6 text-center shadow">See if the sum of any two numbers in an array add up to a selected total</div>
+            <form className="w-full grid grid-cols-4 gap-4 justify-items-center" onSubmit={(event) => {
+                event.preventDefault()
+                if(event.target[0].value !== ""){
+                    findSum(event.target[0].value)
+                }
+                else{
+                    findSum()
+                }
+            }}>
+                <input type="number" placeholder="default 100" className="col-start-2 border-2 rounded border-gray-200"/>
+                <button type="submit" className="col-start-3 bg-gray-300 hover:bg-gray-100 rounded-xl p-1 float-right" >
+                    Run Multiple Pointers
+                </button>
+            </form>
             <div className={`flex items-center h-64 grid grid-cols-${rows} grid-flow-row gap-8`}>
                 {testArray.map((value, index) => {
                     return <ArrayCircle value={value} index={index} />
                 })}
             </div>
-            <form>
-                <input type="number"></input>
-                <button className="hover:bg-gray-200 rounded-xl p-1 float-right" onClick={() => findSum()}>
-                    Run Multiple Pointers
-                </button>
-            </form>
         </div>
     )
 }

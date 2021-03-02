@@ -35,9 +35,14 @@ const Navbar = () => {
                     Pathfinding Algorithms
                 </div>
             </div>
-            <button className="bg-white w-full rounded-md hover:bg-gray-100">
-                <Link to="/DataStructure-and-Algorithm-Visualizer/multiple-pointers">Multiple pointers</Link>
-            </button>
+            <div id="path-finding-container" className="mb-12">
+                <div className="border-gray-100 w-full rounded-sm border-2 mb-2  shadow-xl">
+                    Other
+                </div>
+                <button className="bg-white w-full rounded-md hover:bg-gray-100">
+                    <Link to="/DataStructure-and-Algorithm-Visualizer/multiple-pointers">Multiple pointers</Link>
+                </button>
+            </div>
         </div>
     )
 }
