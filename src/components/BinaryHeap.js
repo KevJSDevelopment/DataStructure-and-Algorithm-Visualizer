@@ -79,10 +79,13 @@ const BinaryHeap = () => {
     const heap = new MaxBinaryHeap()
 
     return (
-        <div>
+        <div id="binary-heap-page" className="h-screen w-screen">
             <div>Currently being worked on</div>
-            <button className="border-2 rounded bg-gray-300 m-12 hover:bg-gray-100 border-gray-500" onClick={() => heap.insert(Math.floor((Math.random() * 25)))}>Insert Number</button>
-            <button className="border-2 rounded bg-gray-300 m-12 hover:bg-gray-100 border-gray-500" onClick={() => {
+            <canvas id="heap-canvas" className="mt-2 ml-2 border-gray-200 border-2" width={window.innerWidth * .9} height={window.innerHeight * .9} >
+            
+            </canvas>
+            <button className="border-2 rounded bg-gray-300 m-2 hover:bg-gray-100 border-gray-500" onClick={() => heap.insert(Math.floor((Math.random() * 25)))}>Insert Number</button>
+            <button className="border-2 rounded bg-gray-300 m-2 hover:bg-gray-100 border-gray-500" onClick={() => {
                 console.log(heap.values)
                 console.log(heap.extractMax())
                 }}>Extract</button>
