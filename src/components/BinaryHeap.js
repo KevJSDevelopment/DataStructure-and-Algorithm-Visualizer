@@ -80,6 +80,7 @@ const BinaryHeap = () => {
 
     return (
         <div>
+            <div>Currently being worked on</div>
             <button className="border-2 rounded bg-gray-300 m-12 hover:bg-gray-100 border-gray-500" onClick={() => heap.insert(Math.floor((Math.random() * 25)))}>Insert Number</button>
             <button className="border-2 rounded bg-gray-300 m-12 hover:bg-gray-100 border-gray-500" onClick={() => {
                 console.log(heap.values)
