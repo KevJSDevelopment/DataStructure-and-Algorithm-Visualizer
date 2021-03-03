@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { TreeNode } from '../helperMethods/DataStructureClasses'
-import { drawNode, getXPos, drawConnection, resetCanvas } from '../helperMethods/BinarySearchHelpers';
+import { drawNode, getXPos, drawConnection, resetCanvas } from '../helperMethods/BinarySearchAnimations';
 
 class BinaryTree {
     constructor() {
