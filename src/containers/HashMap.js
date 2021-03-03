@@ -1,9 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import HashBox from '../components/HashBox';
 
 class HashTable {
 
-    constructor(size=20){
-        this.keyMap = new Array(size);
+    constructor(size=15){
+        const array = []
+        for(let i = 0; i < size; i++){
+            array.push(null)
+        }
+        this.keyMap = array
     }
 
     hash(key) {
@@ -20,7 +25,7 @@ class HashTable {
     set(key, value){
         const index = this.hash(key)
         if(!this.keyMap[index]){
-            this.keyMap[index] = [value]
+            this.keyMap[index] = [[key,value]]
         } else {
             this.keyMap[index].push([key,value])
         }
@@ -44,17 +49,35 @@ class HashTable {
 }
 
 const HashMap = () => {
-    const [hash, setHash] = useState(new HashTable(20))
+    const [hash, setHash] = useState(new HashTable())
+    const [currentColor, setcurrentColor] = useState(['black', '#000000'])
+
+    const handleSetHash = (event) => {
+        event.preventDefault()
+
+        if(event.target[0].value !== "" && event.target[1].value !== "") {
+            hash.set(event.target[0].value, event.target[1].value)
+        }
+        else{
+            alert("You must enter a color and hex color")
+        }
+    }
 
     return (
         <div className="w-full h-screen" >
-            <div id="hash-map-container" className="w-full h-5/6">
-                {hash.map(index => {
-                    return <HashBox />
-                })}
+            <div className="h-5/6">
+                <div id="hash-map-container" className="w-full p-2 flex flex-row">
+                    {hash.keyMap.map((element, index) => {
+                        return <HashBox element={element} index={index} key={index}/>
+                    })}
+                </div>
+                <div className="flex flex-row">
+                    <div className="m-6 p-2">Selected Color: </div>
+                    <div className="m-6 p-2 rounded w-4/6 text-white" style={{backgroundColor: currentColor[0]}}> {currentColor[0]} : {currentColor[1]} </div>
+                </div>
             </div>
             <div className="flex flex-row bg-gray-100 rounded m-2">
-                <form className="m-2">
+                <form className="m-2" onSubmit={(e) => handleSetHash(e)}>
                     <input className="m-6" type="text" placeholder="Enter a color"/>
                     <input className="m-6" type="text" placeholder="Hexadecimal for color"/>
                     <button className="bg-gray-300 hover:bg-white pl-2 pr-2 rounded m-6" type="submit">Set</button>
