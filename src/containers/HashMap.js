@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 class HashTable {
 
-    constructor(size=50){
+    constructor(size=20){
         this.keyMap = new Array(size);
     }
 
@@ -38,15 +38,32 @@ class HashTable {
                 }
             }
         }
-        
+
         return undefined
     }
 }
 
 const HashMap = () => {
+    const [hash, setHash] = useState(new HashTable(20))
+
     return (
-        <div>
-            
+        <div className="w-full h-screen" >
+            <div id="hash-map-container" className="w-full h-5/6">
+                {hash.map(index => {
+                    return <HashBox />
+                })}
+            </div>
+            <div className="flex flex-row bg-gray-100 rounded m-2">
+                <form className="m-2">
+                    <input className="m-6" type="text" placeholder="Enter a color"/>
+                    <input className="m-6" type="text" placeholder="Hexadecimal for color"/>
+                    <button className="bg-gray-300 hover:bg-white pl-2 pr-2 rounded m-6" type="submit">Set</button>
+                </form>
+                <form className="m-2">
+                    <input className="m-6" type="text" placeholder="Enter a color"/>
+                    <button className="bg-gray-300 hover:bg-white pl-2 pr-2 rounded m-6" type="submit">Get</button>
+                </form>
+            </div>
         </div>
     )
 }

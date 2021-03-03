@@ -1,5 +1,5 @@
-import Navbar from './containers/Navbar'
-import Algorithms from './containers/Algorithms'
+import Navbar from './Navbar'
+import Algorithms from './Algorithms'
 import { BrowserRouter as Router } from 'react-router-dom';
 
 const App = () => {

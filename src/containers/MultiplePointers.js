@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import ArrayCircle from './ArrayCircle'
+import ArrayCircle from '../components/ArrayCircle'
 
 const MultiplePointers = () => {
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import ArrayBar from './ArrayBar';
+import ArrayBar from '../components/ArrayBar';
 import {getMergeSortAnimations} from '../helperMethods/MergeSort'
 import {resetArray} from '../helperMethods/HelperMethods'
 

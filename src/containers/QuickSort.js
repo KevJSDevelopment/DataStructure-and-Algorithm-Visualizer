@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {resetArray} from '../helperMethods/HelperMethods'
-import ArrayBar from './ArrayBar'
+import ArrayBar from '../components/ArrayBar'
 // import { quickSort } from '../helperMethods/QuickSort'
 
 const QuickSort = () => {

@@ -1,13 +1,14 @@
 import React from 'react'
-import MultiplePointers from '../components/MultiplePointers'
+import MultiplePointers from './containers/MultiplePointers'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-import Home from '../components/Home';
-import MergeSort from '../components/MergeSort';
-import QuickSort from '../components/QuickSort';
-import BubbleSort from '../components/BubbleSort';
-import LinkedList from '../components/SingleLinkedList';
-import BinarySearchTree from '../components/BinaryTree';
-import BinaryHeap from '../components/BinaryHeap';
+import Home from './containers/Home';
+import MergeSort from './containers/MergeSort';
+import QuickSort from './containers/QuickSort';
+import BubbleSort from './containers/BubbleSort';
+import LinkedList from './containers/SingleLinkedList';
+import BinarySearchTree from './containers/BinaryTree';
+import BinaryHeap from './containers/BinaryHeap';
+import HashMap from './containers/HashMap';
 
 const Algorithms = () => {
     
@@ -23,6 +24,7 @@ const Algorithms = () => {
                 <Route path="/DataStructure-and-Algorithm-Visualizer/linked-list" exact render={() => <LinkedList /> }/>
                 <Route path="/DataStructure-and-Algorithm-Visualizer/binary-tree" exact render={() => <BinarySearchTree/>}/>
                 <Route path="/DataStructure-and-Algorithm-Visualizer/binary-heap" exact render={() => <BinaryHeap/>}/>
+                <Route path="/DataStructure-and-Algorithm-Visualizer/hash-map" exact render={() => <HashMap/>}/>
                 <Redirect to="/DataStructure-and-Algorithm-Visualizer"/>
             </Switch>
         </div>

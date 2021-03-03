@@ -32,6 +32,9 @@ const Navbar = () => {
                 <button className="bg-white w-full mb-2 rounded-md hover:bg-gray-100">
                     <Link to="/DataStructure-and-Algorithm-Visualizer/binary-heap">Binary Heap</Link>
                 </button>
+                <button className="bg-white w-full mb-2 rounded-md hover:bg-gray-100">
+                    <Link to="/DataStructure-and-Algorithm-Visualizer/hash-map">Hash Map</Link>
+                </button>
             </div>
             <div id="path-finding-container" className="mb-12">
                 <div className="border-gray-100 w-full rounded-sm border-2 mb-2  shadow-xl">

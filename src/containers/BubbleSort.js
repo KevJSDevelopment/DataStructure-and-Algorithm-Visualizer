@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import ArrayBar from './ArrayBar'
+import ArrayBar from '../components/ArrayBar'
 import { resetArray } from '../helperMethods/HelperMethods'
 
 const BubbleSort = () => {
