@@ -110,7 +110,10 @@ const HashMap = () => {
         <div className="w-full h-screen" >
             <div className="h-5/6">
                 <div className="text-center shadow m-2 bg-white">
-                        Hashmap Using Colors
+                    Hashmap Using Separate Chaining
+                </div>
+                <div className="text-center m-2 bg-white">
+                    (enter any key, but best with colors)
                 </div>
                 <div id="hash-map-container" className="w-full h-4/6 p-2 flex flex-row">
                     [{hash.keyMap.map((element, index) => {
@@ -123,12 +126,12 @@ const HashMap = () => {
             </div>
             <div className="flex flex-row bg-gray-100 rounded m-2">
                 <form className="m-2 w-4/6" onSubmit={(e) => handleSetHash(e)}>
-                    <input className="m-2" type="text" placeholder="Enter a color"/>
-                    <input className="m-2 w-1/2" type="text" placeholder="Enter color value, example: hexadecimal"/>
+                    <input className="m-2 w-1/3" type="text" placeholder="Enter a key, ex: red"/>
+                    <input className="m-2 w-1/3" type="text" placeholder="Enter a value, ex: #FF0000"/>
                     <button className="bg-gray-300 hover:bg-white pl-2 pr-2 rounded m-6" type="submit">Set</button>
                 </form>
                 <form className="m-2" onSubmit={(e) => handleGetHash(e)}>
-                    <input className="m-6" type="text" placeholder="Enter a color"/>
+                    <input className="m-6" type="text" placeholder="Enter a key"/>
                     <button className="bg-gray-300 hover:bg-white pl-2 pr-2 rounded m-6" type="submit">Get</button>
                 </form>
             </div>
