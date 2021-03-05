@@ -82,6 +82,9 @@ const HashMap = () => {
     const [hash, setHash] = useState(new HashTable())
     const [currentColor, setcurrentColor] = useState(['black', '#000000'])
 
+    const x = 6 % 2
+    const y = x ? 'one' : 'two'
+    console.log(y)
     const handleSetHash = (event) => {
         event.preventDefault()
         const key = event.target[0].value
