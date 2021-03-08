@@ -1,7 +1,6 @@
 import React from 'react'
 import MultiplePointers from './containers/MultiplePointers'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
-import Home from './containers/Home';
 import MergeSort from './containers/MergeSort';
 import QuickSort from './containers/QuickSort';
 import BubbleSort from './containers/BubbleSort';
@@ -16,8 +15,6 @@ const Algorithms = () => {
     return (
         <div className="w-screen">
             <Switch>
-                <Route path="/" exact render={() => <Home />}/>
-                <Route path="/DataStructure-and-Algorithm-Visualizer" exact render={() => <Home /> }/>
                 <Route path="/DataStructure-and-Algorithm-Visualizer/multiple-pointers" exact render={() => <MultiplePointers /> }/> 
                 <Route path="/DataStructure-and-Algorithm-Visualizer/merge-sort" exact render={() => <MergeSort /> }/> 
                 <Route path="/DataStructure-and-Algorithm-Visualizer/quick-sort" exact render={() => <QuickSort /> }/> 
@@ -27,7 +24,7 @@ const Algorithms = () => {
                 <Route path="/DataStructure-and-Algorithm-Visualizer/binary-heap" exact render={() => <BinaryHeap />}/>
                 <Route path="/DataStructure-and-Algorithm-Visualizer/hash-map" exact render={() => <HashMap />}/>
                 <Route path="/DataStructure-and-Algorithm-Visualizer/dijkstras" exact render={() => <Dijkstras />}/>
-                <Redirect to="/DataStructure-and-Algorithm-Visualizer"/>
+                <Redirect to="/DataStructure-and-Algorithm-Visualizer/merge-sort"/>
             </Switch>
         </div>
     )
