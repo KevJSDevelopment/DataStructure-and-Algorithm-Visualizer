@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/DataStructure-and-Algorithm-Visualizer/static/css/main.7c9d4ef6.chunk.css",
-    "main.js": "/DataStructure-and-Algorithm-Visualizer/static/js/main.130eda41.chunk.js",
-    "main.js.map": "/DataStructure-and-Algorithm-Visualizer/static/js/main.130eda41.chunk.js.map",
+    "main.css": "/DataStructure-and-Algorithm-Visualizer/static/css/main.c448a0be.chunk.css",
+    "main.js": "/DataStructure-and-Algorithm-Visualizer/static/js/main.6387e8e3.chunk.js",
+    "main.js.map": "/DataStructure-and-Algorithm-Visualizer/static/js/main.6387e8e3.chunk.js.map",
     "runtime-main.js": "/DataStructure-and-Algorithm-Visualizer/static/js/runtime-main.8509b4e9.js",
     "runtime-main.js.map": "/DataStructure-and-Algorithm-Visualizer/static/js/runtime-main.8509b4e9.js.map",
-    "static/js/2.bc60d62a.chunk.js": "/DataStructure-and-Algorithm-Visualizer/static/js/2.bc60d62a.chunk.js",
-    "static/js/2.bc60d62a.chunk.js.map": "/DataStructure-and-Algorithm-Visualizer/static/js/2.bc60d62a.chunk.js.map",
+    "static/js/2.6ad05271.chunk.js": "/DataStructure-and-Algorithm-Visualizer/static/js/2.6ad05271.chunk.js",
+    "static/js/2.6ad05271.chunk.js.map": "/DataStructure-and-Algorithm-Visualizer/static/js/2.6ad05271.chunk.js.map",
     "index.html": "/DataStructure-and-Algorithm-Visualizer/index.html",
-    "static/css/main.7c9d4ef6.chunk.css.map": "/DataStructure-and-Algorithm-Visualizer/static/css/main.7c9d4ef6.chunk.css.map",
-    "static/js/2.bc60d62a.chunk.js.LICENSE.txt": "/DataStructure-and-Algorithm-Visualizer/static/js/2.bc60d62a.chunk.js.LICENSE.txt"
+    "static/css/main.c448a0be.chunk.css.map": "/DataStructure-and-Algorithm-Visualizer/static/css/main.c448a0be.chunk.css.map",
+    "static/js/2.6ad05271.chunk.js.LICENSE.txt": "/DataStructure-and-Algorithm-Visualizer/static/js/2.6ad05271.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.8509b4e9.js",
-    "static/js/2.bc60d62a.chunk.js",
-    "static/css/main.7c9d4ef6.chunk.css",
-    "static/js/main.130eda41.chunk.js"
+    "static/js/2.6ad05271.chunk.js",
+    "static/css/main.c448a0be.chunk.css",
+    "static/js/main.6387e8e3.chunk.js"
   ]
 }
