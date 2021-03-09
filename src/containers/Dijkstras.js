@@ -91,7 +91,7 @@ const Dijkstras = () => {
 
             array.push(innerArray)
             row++
-            lastRowY += 30
+            lastRowY += 31
         }
 
         setNodes(array)
@@ -112,7 +112,7 @@ const Dijkstras = () => {
 
     return (
         <div id="dijkstras-container" className="w-full h-full" onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
-            <div id="dijkstras-grid" className="w-5/6 h-5/6 mt-12">
+            <div id="dijkstras-grid" className="w-5/6 h-5/6 m-12 ml-24 border-2 border-gray-300 p-2">
                 {nodes.map(row => {
                     return <NodeRow values={row} row={row[0].row} mousePressed={mousePressed} />
                 })}
