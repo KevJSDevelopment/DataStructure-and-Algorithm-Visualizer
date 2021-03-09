@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { PriorityQueue } from '../helperMethods/DataStructureClasses'
 import  Node  from '../components/Node';
 import { render } from 'react-dom';
@@ -68,17 +68,7 @@ class WeightedGraph {
 
 const Dijkstras = () => {
 
-    const onMouseDown = () => {
-
-    }
-
-    const onMouseEnter = () => {
-
-    }
-
-    const onMouseUp = () => {
-
-    }
+    const [mouseDown, setmouseDown] = useState(false)
 
     const handleCreateGraph = () => {
         const graph = new WeightedGraph()
@@ -95,7 +85,7 @@ const Dijkstras = () => {
             
             while(lastNodeX < coordinates.right){
                 const div = document.createElement("div")
-                render(<Node col={col} isFinish={false} isStart={false} isWall={false} row={row} onMouseDown={onMouseDown} onMouseEnter={onMouseEnter} onMouseUp={onMouseUp}/>, div)
+                render(<Node col={col} isFinish={false} isStart={false} isWall={false} onMouseDown={onMouseDown} onMouseUp={onMouseUp} mouseDown={mouseDown} row={row} />, div)
                 nodeRow.append(div)
                 lastNodeX += 25
                 col++
@@ -107,13 +97,23 @@ const Dijkstras = () => {
         }
     }
 
+
+    const onMouseUp = () => {
+        setmouseDown(false)
+    }
+
+
+    const onMouseDown = () => {
+        setmouseDown(true)
+    }
+
     useEffect(() => {
         handleCreateGraph()
     }, [])
 
     return (
         <div id="dijkstras-container" className="block w-full h-full">
-            <div id="dijkstras-grid" className="w-5/6 h-5/6">
+            <div id="dijkstras-grid" className="w-5/6 h-5/6" onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
 
             </div>
             <button onClick={() => handleCreateGraph()}>
