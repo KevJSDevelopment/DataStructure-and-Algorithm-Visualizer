@@ -10,8 +10,8 @@ class WeightedGraph {
         if(!this.adjacencyList[vertex]) this.adjacencyList[vertex] = [];
     }
     addEdge(vertex1,vertex2, weight){
-        this.adjacencyList[vertex1].push({node:vertex2, weight});
-        this.adjacencyList[vertex2].push({node:vertex1, weight});
+        this.adjacencyList[vertex1].push({node: vertex2, weight});
+        this.adjacencyList[vertex2].push({node: vertex1, weight});
     }
     Dijkstra(start, finish){
         const nodes = new PriorityQueue();
@@ -60,7 +60,6 @@ class WeightedGraph {
                 }
             }
         }
-        console.log(path.concat(smallest).reverse());
         return path.concat(smallest).reverse();     
     }
 }
@@ -69,10 +68,11 @@ const Dijkstras = () => {
 
     const [mousePressed, setMousePressed] = useState(false)
     const [nodes, setNodes] = useState([])
+    const [graph, setGraph] = useState(new WeightedGraph())
+    const [start, setStart] = useState({row: 15, col: 15})
+    const [end, setEnd] = useState({row: 15, col: 50})
 
     const handleCreateGraph = () => {
-        const graph = new WeightedGraph()
-        
         const container = document.getElementById("dijkstras-grid")
         const coordinates = container.getBoundingClientRect()
         let row = 0
@@ -84,13 +84,20 @@ const Dijkstras = () => {
             const innerArray = []
             
             while(lastNodeX < coordinates.right){
-                innerArray.push({row: row, col: col})
+                const node = {row: row, col: col}
+                graph.addVertex(node)
+                graph.addEdge(node, {row: row, col: col - 1}, 1)
+                if(row > 0){
+                    graph.addEdge(node, {row: row -1, col: col}, 1)
+                }
+                innerArray.push(node)
                 lastNodeX += 25
                 col++
             }
 
             array.push(innerArray)
             row++
+            col = 0
             lastRowY += 31
         }
 
@@ -106,8 +113,32 @@ const Dijkstras = () => {
         // debugger
         setMousePressed(false)
     }
-    useEffect(() => {
-        handleCreateGraph()
+
+    const handleSetStart = (row = 15, col =15) => {
+        const oldNode = document.getElementById(`node-${start.row}-${start.col}`)
+        oldNode.style.backgroundColor = "white"
+        const node = document.getElementById(`node-${row}-${col}`)
+        node.style.backgroundColor = "lightgreen"
+        setStart({row: row, col: col})
+    }
+
+    const handleSetEnd = (row = 15, col = 50) => {
+        const oldNode = document.getElementById(`node-${end.row}-${end.col}`)
+        oldNode.style.backgroundColor = "white"
+        const node = document.getElementById(`node-${row}-${col}`)
+        node.style.backgroundColor = "magenta"
+
+        setEnd({row: row, col: col})
+    }
+
+    const handleDijkstras = () => {
+        
+    }
+
+    useEffect(async () => {
+        await handleCreateGraph()
+        handleSetStart()
+        handleSetEnd()
     }, [])
 
     return (
@@ -117,9 +148,34 @@ const Dijkstras = () => {
                     return <NodeRow values={row} row={row[0].row} mousePressed={mousePressed} />
                 })}
             </div>
-            <button onClick={() => handleCreateGraph()}>
-                Create Graph
-            </button>
+            <div className="flex flex-row items-center">
+                <form className="m-6 border-2" onSubmit={(event) => {
+                    event.preventDefault();
+                    debugger
+                    handleSetStart(event.target[0].value, event.target[1].value)}}>
+                    <label className="ml-2">Row: </label>
+                    <input className="ml-2" type="number" placeholder="15" />
+                    <label className="ml-2">Col: </label>
+                    <input className="ml-2" type="number" placeholder="15" />
+                    <button className="border-2 bg-gray-300 ml-2 hover:bg-gray-100 rounded" type="submit">
+                        Set Start Point
+                    </button>
+                </form>
+                <form className="m-6 border-2" onSubmit={(event) => {
+                    event.preventDefault();
+                    handleSetEnd(event.target[0].value, event.target[1].value)}}>
+                    <label className="ml-2">Row: </label>
+                    <input className="ml-2" type="number" placeholder="15" />
+                    <label className="ml-2">Col: </label>
+                    <input className="ml-2" type="number" placeholder="50" />
+                    <button className="border-2 bg-gray-300 ml-2 hover:bg-gray-100 rounded" type="submit">
+                        Set End Point
+                    </button>
+                </form>
+                <button className="ml-2 h-1/2 border-2 bg-gray-300 hover:bg-gray-100 rounded" onClick={handleDijkstras}>
+                    Start
+                </button>
+            </div>
         </div>
     )
 }

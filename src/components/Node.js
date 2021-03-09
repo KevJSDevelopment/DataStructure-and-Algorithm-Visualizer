@@ -24,14 +24,8 @@ const Node = (props) => {
         }
     }
 
-
-    return (
-        <div
-        id={`node-${row}-${col}`}
-        className="node ml-1 mb-1"
-        onMouseOver={(e) => onMouseEnter(e)}>
-        </div>
-    )
+    if(col === 0) return <div className="column-number">{row > 0 ? row : null}</div>;
+    else return <div id={`node-${row}-${col}`} className={"node ml-1 mb-1"} onMouseOver={(e) => onMouseEnter(e)}></div>;
 }
 
 export default Node
