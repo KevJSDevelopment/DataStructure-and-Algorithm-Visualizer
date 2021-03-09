@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { PriorityQueue } from '../helperMethods/DataStructureClasses'
-import  Node  from '../components/Node';
-import { render } from 'react-dom';
+import NodeRow from '../components/NodeRow';
 
 class WeightedGraph {
     constructor() {
@@ -68,7 +67,8 @@ class WeightedGraph {
 
 const Dijkstras = () => {
 
-    const [mouseDown, setmouseDown] = useState(false)
+    const [mousePressed, setMousePressed] = useState(false)
+    const [nodes, setNodes] = useState([])
 
     const handleCreateGraph = () => {
         const graph = new WeightedGraph()
@@ -78,43 +78,44 @@ const Dijkstras = () => {
         let row = 0
         let col = 0
         let lastRowY = 25
+        const array = []
         while(lastRowY < coordinates.bottom){
             let lastNodeX = 25
-            const nodeRow = document.createElement("div")
-            nodeRow.className = `row-${row} flex flex-row`
+            const innerArray = []
             
             while(lastNodeX < coordinates.right){
-                const div = document.createElement("div")
-                render(<Node col={col} isFinish={false} isStart={false} isWall={false} onMouseDown={onMouseDown} onMouseUp={onMouseUp} mouseDown={mouseDown} row={row} />, div)
-                nodeRow.append(div)
+                innerArray.push({row: row, col: col})
                 lastNodeX += 25
                 col++
             }
 
-            container.append(nodeRow)
+            array.push(innerArray)
             row++
-            lastRowY += 25
+            lastRowY += 30
         }
+
+        setNodes(array)
     }
 
-
-    const onMouseUp = () => {
-        setmouseDown(false)
+    const handleMouseDown = () => {
+        // debugger
+        setMousePressed(true)
     }
 
-
-    const onMouseDown = () => {
-        setmouseDown(true)
+    const handleMouseUp = () => {
+        // debugger
+        setMousePressed(false)
     }
-
     useEffect(() => {
         handleCreateGraph()
     }, [])
 
     return (
-        <div id="dijkstras-container" className="block w-full h-full">
-            <div id="dijkstras-grid" className="w-5/6 h-5/6" onMouseDown={onMouseDown} onMouseUp={onMouseUp}>
-
+        <div id="dijkstras-container" className="w-full h-full" onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
+            <div id="dijkstras-grid" className="w-5/6 h-5/6 mt-12">
+                {nodes.map(row => {
+                    return <NodeRow values={row} row={row[0].row} mousePressed={mousePressed} />
+                })}
             </div>
             <button onClick={() => handleCreateGraph()}>
                 Create Graph
