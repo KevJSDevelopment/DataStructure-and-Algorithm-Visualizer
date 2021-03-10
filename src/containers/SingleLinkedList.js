@@ -82,7 +82,7 @@ const LinkedList = () => {
             div.style.border = '2px solid blue'
             div.innerHTML = value
             div.id = "node-head"
-            div.className = "node"
+            div.className = "list-node"
             container.append(div)
             list.push(value)
         } else {
@@ -109,7 +109,7 @@ const LinkedList = () => {
             div.style.border = '2px solid lightgreen'
             div.innerHTML = value
             div.id = "node-tail"
-            div.className = "node"
+            div.className = "list-node"
 
             container.append(spacer)
             container.append(div)
@@ -198,7 +198,7 @@ const LinkedList = () => {
             div.style.padding = "1%"
             div.style.border = '2px solid blue'
             div.innerHTML = value
-            div.className = "node"
+            div.className = "list-node"
             div.id = "node-head"
             
             const spacer = document.createElement("div")
