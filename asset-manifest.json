@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/DataStructure-and-Algorithm-Visualizer/static/css/main.ba86bf63.chunk.css",
-    "main.js": "/DataStructure-and-Algorithm-Visualizer/static/js/main.f8b5de20.chunk.js",
-    "main.js.map": "/DataStructure-and-Algorithm-Visualizer/static/js/main.f8b5de20.chunk.js.map",
+    "main.js": "/DataStructure-and-Algorithm-Visualizer/static/js/main.a83c3bdc.chunk.js",
+    "main.js.map": "/DataStructure-and-Algorithm-Visualizer/static/js/main.a83c3bdc.chunk.js.map",
     "runtime-main.js": "/DataStructure-and-Algorithm-Visualizer/static/js/runtime-main.8509b4e9.js",
     "runtime-main.js.map": "/DataStructure-and-Algorithm-Visualizer/static/js/runtime-main.8509b4e9.js.map",
     "static/js/2.14950260.chunk.js": "/DataStructure-and-Algorithm-Visualizer/static/js/2.14950260.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.8509b4e9.js",
     "static/js/2.14950260.chunk.js",
     "static/css/main.ba86bf63.chunk.css",
-    "static/js/main.f8b5de20.chunk.js"
+    "static/js/main.a83c3bdc.chunk.js"
   ]
 }
