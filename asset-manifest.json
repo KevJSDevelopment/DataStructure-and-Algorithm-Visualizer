@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/DataStructure-and-Algorithm-Visualizer/static/css/main.ba86bf63.chunk.css",
-    "main.js": "/DataStructure-and-Algorithm-Visualizer/static/js/main.a83c3bdc.chunk.js",
-    "main.js.map": "/DataStructure-and-Algorithm-Visualizer/static/js/main.a83c3bdc.chunk.js.map",
+    "main.js": "/DataStructure-and-Algorithm-Visualizer/static/js/main.2881f1d4.chunk.js",
+    "main.js.map": "/DataStructure-and-Algorithm-Visualizer/static/js/main.2881f1d4.chunk.js.map",
     "runtime-main.js": "/DataStructure-and-Algorithm-Visualizer/static/js/runtime-main.8509b4e9.js",
     "runtime-main.js.map": "/DataStructure-and-Algorithm-Visualizer/static/js/runtime-main.8509b4e9.js.map",
-    "static/js/2.14950260.chunk.js": "/DataStructure-and-Algorithm-Visualizer/static/js/2.14950260.chunk.js",
-    "static/js/2.14950260.chunk.js.map": "/DataStructure-and-Algorithm-Visualizer/static/js/2.14950260.chunk.js.map",
+    "static/js/2.a8c5e1b9.chunk.js": "/DataStructure-and-Algorithm-Visualizer/static/js/2.a8c5e1b9.chunk.js",
+    "static/js/2.a8c5e1b9.chunk.js.map": "/DataStructure-and-Algorithm-Visualizer/static/js/2.a8c5e1b9.chunk.js.map",
     "index.html": "/DataStructure-and-Algorithm-Visualizer/index.html",
     "static/css/main.ba86bf63.chunk.css.map": "/DataStructure-and-Algorithm-Visualizer/static/css/main.ba86bf63.chunk.css.map",
-    "static/js/2.14950260.chunk.js.LICENSE.txt": "/DataStructure-and-Algorithm-Visualizer/static/js/2.14950260.chunk.js.LICENSE.txt"
+    "static/js/2.a8c5e1b9.chunk.js.LICENSE.txt": "/DataStructure-and-Algorithm-Visualizer/static/js/2.a8c5e1b9.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.8509b4e9.js",
-    "static/js/2.14950260.chunk.js",
+    "static/js/2.a8c5e1b9.chunk.js",
     "static/css/main.ba86bf63.chunk.css",
-    "static/js/main.a83c3bdc.chunk.js"
+    "static/js/main.2881f1d4.chunk.js"
   ]
 }
