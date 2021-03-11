@@ -1,6 +1,8 @@
 # App Information
 
-This App is designed to visualize data structures(DS) and algorithm's. It is currently being updated as I learn about new DS & Algorithm's.
+This App is designed to visualize data structures(DS) and algorithm's. 
+
+It is currently still in development & will be continuously updated as new ideas for visualizations are implemented.
 
 I used firebase to host the app, originally it was hosted on Github pages. However Github pages does not provide support for single page applications.
 
