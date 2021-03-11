@@ -79,7 +79,7 @@ const Dijkstras = () => {
         let col = 0
         let lastRowY = 25
         const array = []
-        while(lastRowY < coordinates.bottom){
+        while(lastRowY < coordinates.bottom - 25){
             let lastNodeX = 25
             const innerArray = []
             
