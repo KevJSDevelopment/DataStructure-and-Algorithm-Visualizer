@@ -8,7 +8,7 @@ I used firebase to host the app, originally it was hosted on Github pages. Howev
 
 You can access the application here - https://ds-algorithm-visualizer.web.app/
 
-This app utilized asynchronous, higher order, and recursive functions to create unique animations for each DS or algorithm
+This app utilizes asynchronous, higher order, and recursive functions to create unique animations for each DS or algorithm
 
 Animations were created with Javascript & vanilla css
 
