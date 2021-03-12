@@ -13,7 +13,17 @@ class WeightedGraph {
         this.adjacencyList[vertex1].push({node: vertex2, weight});
         this.adjacencyList[vertex2].push({node: vertex1, weight});
     }
-    Dijkstra = async (start, finish) => {
+    removeEdge(vertex1,vertex2){
+        if(!this.adjacencyList[vertex1]) debugger
+        this.adjacencyList[vertex1] = this.adjacencyList[vertex1].filter(
+            v => v.node !== vertex2
+        );
+        if(!this.adjacencyList[vertex2]) debugger
+        this.adjacencyList[vertex2] = this.adjacencyList[vertex2].filter(
+            v => v.node !== vertex1
+        );
+    }
+    Dijkstra(start, finish) {
         const nodes = new PriorityQueue();
         const distances = {};
         const previous = {};
@@ -67,7 +77,7 @@ class WeightedGraph {
                     //find neighboring node
                     let nextNode = this.adjacencyList[smallest][neighbor];
                     const next = document.getElementById(`node-${nextNode.node}`)
-                    next.classList.add("node-visited")
+                    if(!next.classList.contains("node-wall")) next.classList.add("node-visited")
                     //calculate new distance to neighboring node
                     let candidate = distances[smallest] + nextNode.weight;
                     let nextNeighbor = nextNode.node;
@@ -93,6 +103,8 @@ const Dijkstras = () => {
     const [graph, setGraph] = useState(new WeightedGraph())
     const [start, setStart] = useState(`row-${15}-col-${15}`)
     const [end, setEnd] = useState(`row-${15}-col-${30}`)
+    const [numberOfColumns, setNumberOfColumns] = useState(0)
+    const [numberOfRows, setNumberOfRows] = useState(0)
 
     const handleCreateGraph = () => {
         const container = document.getElementById("dijkstras-grid")
@@ -108,23 +120,24 @@ const Dijkstras = () => {
             while(lastNodeX < coordinates.right){
                 const node = `row-${row}-col-${col}`
                 graph.addVertex(node)
-                if(col > 0){
-                    graph.addEdge(node, `row-${row}-col-${col-1}`, 1)
-                }
                 if(row > 0){
-                    graph.addEdge(node, `row-${row-1}-col-${col}`, 1)
+                    graph.addEdge(node, `row-${row - 1}-col-${col}`, 1)
+                }
+                if(col > 0){
+                    graph.addEdge(node, `row-${row}-col-${col - 1}`, 1)
                 }
                 innerArray.push(node)
                 lastNodeX += 25
                 col++
             }
-
+            
             array.push(innerArray)
+            if(row === 0) setNumberOfColumns(col)
             row++
             col = 0
             lastRowY += 31
         }
-
+        setNumberOfRows(row)
         setNodes(array)
     }
 
@@ -155,7 +168,43 @@ const Dijkstras = () => {
     }
 
     const handleDijkstras = () => {
-        const path = graph.Dijkstra(start, end)
+        let row = 0
+        let col = 0
+        
+        while(row < numberOfRows){
+            while(col < numberOfColumns){
+                const node = `row-${row}-col-${col}`
+                const nodeDiv = document.getElementById(`node-${node}`)
+                if(col > 0){
+                    if(nodeDiv.classList.contains("node-wall")){
+                        graph.removeEdge(node, `row-${row}-col-${col-1}`)
+                        graph.addEdge(node, `row-${row}-col-${col-1}`, 100)
+                        
+                    }
+                    else {
+                        graph.removeEdge(node, `row-${row}-col-${col-1}`)
+                        graph.addEdge(node, `row-${row}-col-${col-1}`, 1)
+                        
+                    }
+                }
+                if(row > 0){
+                    if(nodeDiv.classList.contains("node-wall")){
+                        graph.removeEdge(node, `row-${row - 1}-col-${col}`)
+                        graph.addEdge(node, `row-${row - 1}-col-${col}`, 100)
+                        
+                    }
+                    else {
+                        graph.removeEdge(node, `row-${row - 1}-col-${col}`)
+                        graph.addEdge(node, `row-${row - 1}-col-${col}`, 1)
+                        
+                    }
+                }
+                col++
+            }
+            row++
+            col = 0
+        }
+        graph.Dijkstra(start, end)
     }
 
     useEffect(async() => {
@@ -166,7 +215,6 @@ const Dijkstras = () => {
 
     return (
         <div id="dijkstras-container" className="w-full h-full" onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
-            <div>Being worked on</div>
             <div id="dijkstras-grid" className="w-5/6 h-5/6 m-12 ml-24 border-2 border-gray-300 p-2">
                 {nodes.map((row, index) => {
                     return <NodeRow values={row} row={row[0].row} key={index} mousePressed={mousePressed} />
