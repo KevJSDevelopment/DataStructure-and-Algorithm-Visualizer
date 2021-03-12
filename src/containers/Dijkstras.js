@@ -138,21 +138,17 @@ const Dijkstras = () => {
         setMousePressed(false)
     }
 
-    const handleSetStart = (row = 15, col =15, set = false) => {
-        if(set){
-            const oldNode = document.getElementById(`node-row-${start.row}-col-${start.col}`)
-            oldNode.style.backgroundColor = "white"
-        }
+    const handleSetStart = (row = 15, col =15) => {
+        const oldNode = document.getElementById(`node-${start}`)
+        oldNode.style.backgroundColor = "white"
         const node = document.getElementById(`node-row-${row}-col-${col}`)
         node.style.backgroundColor = "lightgreen"
         setStart(`row-${row}-col-${col}`)
     }
 
-    const handleSetEnd = (row = 15, col = 30, set = false) => {
-        if(set){
-            const oldNode = document.getElementById(`node-row-${end.row}-col-${end.col}`)
-            oldNode.style.backgroundColor = "white"
-        }
+    const handleSetEnd = (row = 15, col = 30) => {
+        const oldNode = document.getElementById(`node-${end}`)
+        oldNode.style.backgroundColor = "white"
         const node = document.getElementById(`node-row-${row}-col-${col}`)
         node.style.backgroundColor = "magenta"
         setEnd(`row-${row}-col-${col}`)
