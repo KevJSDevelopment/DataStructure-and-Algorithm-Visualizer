@@ -9,11 +9,11 @@ class WeightedGraph {
     addVertex(vertex){
         if(!this.adjacencyList[vertex]) this.adjacencyList[vertex] = [];
     }
-    addEdge(vertex1,vertex2, weight){
+    addEdge(vertex1, vertex2, weight){
         this.adjacencyList[vertex1].push({node: vertex2, weight});
         this.adjacencyList[vertex2].push({node: vertex1, weight});
     }
-    Dijkstra(start, finish){
+    Dijkstra = async (start, finish) => {
         const nodes = new PriorityQueue();
         const distances = {};
         const previous = {};
@@ -30,8 +30,27 @@ class WeightedGraph {
             }
             previous[vertex] = null;
         }
+        
+        return this.checkNode(nodes, distances, previous, path, smallest, finish) 
+    }
+
+    highlightPath(node, index,  path) {
+        if(index === path.length - 1){
+            
+            const nodeDiv = document.getElementById(`node-${node}`)
+            nodeDiv.classList.add("node-path")
+            return path
+        }
+        else{
+            const nodeDiv = document.getElementById(`node-${node}`)
+            nodeDiv.classList.add("node-path")
+            setTimeout(() => this.highlightPath(path[index + 1], index + 1, path), 25)
+        }
+    }   
+
+    checkNode(nodes, distances, previous, path, smallest, finish) { 
         // as long as there is something to visit
-        while(nodes.values.length){
+        if(nodes.values.length){
             smallest = nodes.dequeue().val;
             if(smallest === finish){
                 //WE ARE DONE
@@ -40,12 +59,15 @@ class WeightedGraph {
                     path.push(smallest);
                     smallest = previous[smallest];
                 }
-                break;
+                const fullPath = path.concat(smallest).reverse();
+                return this.highlightPath(fullPath[0], 0, fullPath)
             } 
             if(smallest || distances[smallest] !== Infinity){
                 for(let neighbor in this.adjacencyList[smallest]){
                     //find neighboring node
                     let nextNode = this.adjacencyList[smallest][neighbor];
+                    const next = document.getElementById(`node-${nextNode.node}`)
+                    next.classList.add("node-visited")
                     //calculate new distance to neighboring node
                     let candidate = distances[smallest] + nextNode.weight;
                     let nextNeighbor = nextNode.node;
@@ -60,7 +82,7 @@ class WeightedGraph {
                 }
             }
         }
-        return path.concat(smallest).reverse();     
+        setTimeout(() => this.checkNode(nodes, distances, previous, path, smallest, finish), 25)
     }
 }
 
@@ -69,8 +91,8 @@ const Dijkstras = () => {
     const [mousePressed, setMousePressed] = useState(false)
     const [nodes, setNodes] = useState([])
     const [graph, setGraph] = useState(new WeightedGraph())
-    const [start, setStart] = useState({row: 15, col: 15})
-    const [end, setEnd] = useState({row: 15, col: 50})
+    const [start, setStart] = useState(`row-${15}-col-${15}`)
+    const [end, setEnd] = useState(`row-${15}-col-${30}`)
 
     const handleCreateGraph = () => {
         const container = document.getElementById("dijkstras-grid")
@@ -84,11 +106,13 @@ const Dijkstras = () => {
             const innerArray = []
             
             while(lastNodeX < coordinates.right){
-                const node = {row: row, col: col}
+                const node = `row-${row}-col-${col}`
                 graph.addVertex(node)
-                graph.addEdge(node, {row: row, col: col - 1}, 1)
+                if(col > 0){
+                    graph.addEdge(node, `row-${row}-col-${col-1}`, 1)
+                }
                 if(row > 0){
-                    graph.addEdge(node, {row: row -1, col: col}, 1)
+                    graph.addEdge(node, `row-${row-1}-col-${col}`, 1)
                 }
                 innerArray.push(node)
                 lastNodeX += 25
@@ -105,37 +129,40 @@ const Dijkstras = () => {
     }
 
     const handleMouseDown = () => {
-        // debugger
+        
         setMousePressed(true)
     }
 
     const handleMouseUp = () => {
-        // debugger
+        
         setMousePressed(false)
     }
 
-    const handleSetStart = (row = 15, col =15) => {
-        const oldNode = document.getElementById(`node-${start.row}-${start.col}`)
-        oldNode.style.backgroundColor = "white"
-        const node = document.getElementById(`node-${row}-${col}`)
+    const handleSetStart = (row = 15, col =15, set = false) => {
+        if(set){
+            const oldNode = document.getElementById(`node-row-${start.row}-col-${start.col}`)
+            oldNode.style.backgroundColor = "white"
+        }
+        const node = document.getElementById(`node-row-${row}-col-${col}`)
         node.style.backgroundColor = "lightgreen"
-        setStart({row: row, col: col})
+        setStart(`row-${row}-col-${col}`)
     }
 
-    const handleSetEnd = (row = 15, col = 50) => {
-        const oldNode = document.getElementById(`node-${end.row}-${end.col}`)
-        oldNode.style.backgroundColor = "white"
-        const node = document.getElementById(`node-${row}-${col}`)
+    const handleSetEnd = (row = 15, col = 30, set = false) => {
+        if(set){
+            const oldNode = document.getElementById(`node-row-${end.row}-col-${end.col}`)
+            oldNode.style.backgroundColor = "white"
+        }
+        const node = document.getElementById(`node-row-${row}-col-${col}`)
         node.style.backgroundColor = "magenta"
-
-        setEnd({row: row, col: col})
+        setEnd(`row-${row}-col-${col}`)
     }
 
     const handleDijkstras = () => {
-        
+        const path = graph.Dijkstra(start, end)
     }
 
-    useEffect(async () => {
+    useEffect(async() => {
         await handleCreateGraph()
         handleSetStart()
         handleSetEnd()
@@ -145,15 +172,14 @@ const Dijkstras = () => {
         <div id="dijkstras-container" className="w-full h-full" onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
             <div>Being worked on</div>
             <div id="dijkstras-grid" className="w-5/6 h-5/6 m-12 ml-24 border-2 border-gray-300 p-2">
-                {nodes.map(row => {
-                    return <NodeRow values={row} row={row[0].row} mousePressed={mousePressed} />
+                {nodes.map((row, index) => {
+                    return <NodeRow values={row} row={row[0].row} key={index} mousePressed={mousePressed} />
                 })}
             </div>
             <div className="flex flex-row items-center">
                 <form className="m-6 border-2" onSubmit={(event) => {
                     event.preventDefault();
-                    debugger
-                    handleSetStart(event.target[0].value, event.target[1].value)}}>
+                    handleSetStart(event.target[0].value, event.target[1].value, true)}}>
                     <label className="ml-2">Row: </label>
                     <input className="ml-2" type="number" placeholder="15" />
                     <label className="ml-2">Col: </label>
@@ -164,7 +190,7 @@ const Dijkstras = () => {
                 </form>
                 <form className="m-6 border-2" onSubmit={(event) => {
                     event.preventDefault();
-                    handleSetEnd(event.target[0].value, event.target[1].value)}}>
+                    handleSetEnd(event.target[0].value, event.target[1].value, true)}}>
                     <label className="ml-2">Row: </label>
                     <input className="ml-2" type="number" placeholder="15" />
                     <label className="ml-2">Col: </label>

@@ -35,11 +35,13 @@ export class PathfindingNode {
 }
 
 export class PriorityQueue {
+
     constructor(){
         this.values = [];
     }
+
     enqueue(val, priority){
-        let newNode = new Node(val, priority);
+        let newNode = new PathfindingNode(val, priority);
         this.values.push(newNode);
         this.bubbleUp();
     }

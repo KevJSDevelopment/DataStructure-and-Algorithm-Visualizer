@@ -4,10 +4,7 @@ import '../styles/node.css';
 
 const Node = (props) => {
     
-    const { col, row, mousePressed } = props
-
-    const [start, setStart] = useState(false)
-    const [end, setEnd] = useState(false)
+    const { node, mousePressed} = props
     const [wall, setWall] = useState(false)
 
     const onMouseEnter = (event) => {
@@ -24,8 +21,11 @@ const Node = (props) => {
         }
     }
 
-    if(col === 0) return <div className="column-number">{row > 0 ? row : null}</div>;
-    else return <div id={`node-${row}-${col}`} className={"node ml-1 mb-1"} onMouseOver={(e) => onMouseEnter(e)}></div>;
+    return (
+        <div id={`node-${node}`} className={"node ml-1 mb-1"} onMouseOver={(e) => onMouseEnter(e)}>
+
+        </div>
+    )
 }
 
 export default Node
