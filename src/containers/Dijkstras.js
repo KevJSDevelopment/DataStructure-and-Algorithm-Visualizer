@@ -92,7 +92,7 @@ class WeightedGraph {
                 }
             }
         }
-        setTimeout(() => this.checkNode(nodes, distances, previous, path, smallest, finish), 25)
+        setTimeout(() => this.checkNode(nodes, distances, previous, path, smallest, finish), 10)
     }
 }
 
@@ -101,8 +101,8 @@ const Dijkstras = () => {
     const [mousePressed, setMousePressed] = useState(false)
     const [nodes, setNodes] = useState([])
     const [graph, setGraph] = useState(new WeightedGraph())
-    const [start, setStart] = useState(`row-${15}-col-${15}`)
-    const [end, setEnd] = useState(`row-${15}-col-${30}`)
+    const [start, setStart] = useState(`row-${10}-col-${5}`)
+    const [end, setEnd] = useState(`row-${10}-col-${25}`)
     const [numberOfColumns, setNumberOfColumns] = useState(0)
     const [numberOfRows, setNumberOfRows] = useState(0)
 
@@ -151,7 +151,7 @@ const Dijkstras = () => {
         setMousePressed(false)
     }
 
-    const handleSetStart = (row = 15, col =15) => {
+    const handleSetStart = (row = 10, col = 5) => {
         const oldNode = document.getElementById(`node-${start}`)
         oldNode.style.backgroundColor = "white"
         const node = document.getElementById(`node-row-${row}-col-${col}`)
@@ -159,7 +159,7 @@ const Dijkstras = () => {
         setStart(`row-${row}-col-${col}`)
     }
 
-    const handleSetEnd = (row = 15, col = 30) => {
+    const handleSetEnd = (row = 10, col = 25) => {
         const oldNode = document.getElementById(`node-${end}`)
         oldNode.style.backgroundColor = "white"
         const node = document.getElementById(`node-row-${row}-col-${col}`)
@@ -225,9 +225,9 @@ const Dijkstras = () => {
                     event.preventDefault();
                     handleSetStart(event.target[0].value, event.target[1].value, true)}}>
                     <label className="ml-2">Row: </label>
-                    <input className="ml-2" type="number" placeholder="15" />
+                    <input className="ml-2" type="number" placeholder="10" />
                     <label className="ml-2">Col: </label>
-                    <input className="ml-2" type="number" placeholder="15" />
+                    <input className="ml-2" type="number" placeholder="10" />
                     <button className="border-2 bg-gray-300 ml-2 hover:bg-gray-100 rounded" type="submit">
                         Set Start Point
                     </button>
@@ -236,9 +236,9 @@ const Dijkstras = () => {
                     event.preventDefault();
                     handleSetEnd(event.target[0].value, event.target[1].value, true)}}>
                     <label className="ml-2">Row: </label>
-                    <input className="ml-2" type="number" placeholder="15" />
+                    <input className="ml-2" type="number" placeholder="10" />
                     <label className="ml-2">Col: </label>
-                    <input className="ml-2" type="number" placeholder="50" />
+                    <input className="ml-2" type="number" placeholder="40" />
                     <button className="border-2 bg-gray-300 ml-2 hover:bg-gray-100 rounded" type="submit">
                         Set End Point
                     </button>
