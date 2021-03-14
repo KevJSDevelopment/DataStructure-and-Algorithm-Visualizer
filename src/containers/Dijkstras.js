@@ -220,8 +220,9 @@ const Dijkstras = () => {
                     return <NodeRow values={row} row={row[0].row} key={index} mousePressed={mousePressed} />
                 })}
             </div>
+            <div>Click and drag on grid to create walls</div>
             <div className="flex flex-row items-center">
-                <form className="m-6 border-2" onSubmit={(event) => {
+                <form className="m-2 border-2" onSubmit={(event) => {
                     event.preventDefault();
                     handleSetStart(event.target[0].value, event.target[1].value, true)}}>
                     <label className="ml-2">Row: </label>
@@ -232,7 +233,7 @@ const Dijkstras = () => {
                         Set Start Point
                     </button>
                 </form>
-                <form className="m-6 border-2" onSubmit={(event) => {
+                <form className="m-2 border-2" onSubmit={(event) => {
                     event.preventDefault();
                     handleSetEnd(event.target[0].value, event.target[1].value, true)}}>
                     <label className="ml-2">Row: </label>
