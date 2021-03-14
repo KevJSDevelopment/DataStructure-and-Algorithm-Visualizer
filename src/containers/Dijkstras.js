@@ -215,12 +215,12 @@ const Dijkstras = () => {
 
     return (
         <div id="dijkstras-container" className="w-full h-full" onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
+            <div className="text-center w-full">Create walls by clicking and dragging</div>
             <div id="dijkstras-grid" className="w-5/6 h-5/6 m-12 ml-24 border-2 border-gray-300 p-2">
                 {nodes.map((row, index) => {
                     return <NodeRow values={row} row={row[0].row} key={index} mousePressed={mousePressed} />
                 })}
             </div>
-            <div>Click and drag on grid to create walls</div>
             <div className="flex flex-row items-center">
                 <form className="m-2 border-2" onSubmit={(event) => {
                     event.preventDefault();
