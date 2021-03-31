@@ -1,6 +1,6 @@
 import React from 'react'
 import MultiplePointers from './containers/MultiplePointers'
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Switch, Route, Redirect } from 'react-router-dom';
 import MergeSort from './containers/MergeSort';
 import QuickSort from './containers/QuickSort';
 import BubbleSort from './containers/BubbleSort';
