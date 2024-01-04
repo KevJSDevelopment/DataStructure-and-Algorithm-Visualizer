@@ -153,17 +153,26 @@ const Dijkstras = () => {
 
     const handleSetStart = (row = 10, col = 5) => {
         const oldNode = document.getElementById(`node-${start}`)
+        if(!oldNode) return;
+
         oldNode.style.backgroundColor = "white"
         const node = document.getElementById(`node-row-${row}-col-${col}`)
+
+        if(!node) return;
         node.style.backgroundColor = "lightgreen"
         setStart(`row-${row}-col-${col}`)
     }
 
     const handleSetEnd = (row = 10, col = 25) => {
+
         const oldNode = document.getElementById(`node-${end}`)
+        if(!oldNode) return;
         oldNode.style.backgroundColor = "white"
+
         const node = document.getElementById(`node-row-${row}-col-${col}`)
+        if(!node) return;
         node.style.backgroundColor = "magenta"
+
         setEnd(`row-${row}-col-${col}`)
     }
 
@@ -207,8 +216,8 @@ const Dijkstras = () => {
         graph.Dijkstra(start, end)
     }
 
-    useEffect(async() => {
-        await handleCreateGraph()
+    useEffect(() => {
+        handleCreateGraph()
         handleSetStart()
         handleSetEnd()
     }, [])
