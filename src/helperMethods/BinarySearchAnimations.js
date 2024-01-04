@@ -12,6 +12,7 @@ export const getXPos = (prevNode, root, left = true) => {
     let xPos
     
     const distanceFromPrevNode = (60 - Math.floor((parseInt(prevNode.nodeNumberOnBranch) * 8)))
+    
     if(left){
         if(prevNode.nodeNumberOnBranch < 3){
             xPos = prevNode.x - (distanceFromPrevNode * 2)

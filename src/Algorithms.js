@@ -24,7 +24,7 @@ const Algorithms = () => {
                 <Route path="/DataStructure-and-Algorithm-Visualizer/binary-heap" exact render={() => <BinaryHeap />}/>
                 <Route path="/DataStructure-and-Algorithm-Visualizer/hash-map" exact render={() => <HashMap />}/>
                 <Route path="/DataStructure-and-Algorithm-Visualizer/dijkstras" exact render={() => <Dijkstras />}/>
-                <Redirect to="/DataStructure-and-Algorithm-Visualizer/merge-sort"/>
+                {/* <Redirect to="/DataStructure-and-Algorithm-Visualizer/merge-sort"/> */}
             </Switch>
         </div>
     )
